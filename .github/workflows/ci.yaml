@@ -70,3 +70,25 @@ jobs:
 
       - name: Run test suite
         run: composer run-script --timeout=600 test
+
+  temporary-commit-check:
+    name: Check against temporary commits
+    runs-on: "ubuntu-22.04"
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP Action
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          coverage: none
+          extensions: pdo_sqlite, gd
+
+      - uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: highest
+
+      - name: Compose check
+        run: |
+          composer info -D --format=json "ibexa/*" | jq --exit-status '.installed[].version | select(test("^dev")) | test("^dev-(?!main|[0-9]+.[0-9]+)") | not'
