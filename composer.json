@@ -13,7 +13,7 @@
   "require": {
     "php": "^7.4 || ^8.0",
     "ext-json": "*",
-    "ibexa/test-core": "~0.1.x-dev"
+    "ibexa/test-core": "dev-added-test-core as 0.1.x-dev"
   },
   "require-dev": {
     "ibexa/code-style": "^1.1",
