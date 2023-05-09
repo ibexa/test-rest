@@ -1,0 +1,356 @@
+{
+    "Product": {
+        "_media-type": "application\/vnd.ibexa.api.Product+json",
+        "code": "testProduct",
+        "isBaseProduct": false,
+        "isVariant": false,
+        "name": "new product",
+        "ProductType": {
+            "_media-type": "application\/vnd.ibexa.api.ProductType+json",
+            "identifier": "attribute_search_check",
+            "name": "Dress",
+            "AttributeAssignmentList": [
+                {
+                    "_media-type": "application\/vnd.ibexa.api.AttributeAssignment+json",
+                    "is_required": false,
+                    "is_discriminator": false,
+                    "Attribute": {
+                        "_media-type": "application\/vnd.ibexa.api.Attribute+json",
+                        "identifier": "foo_boolean",
+                        "name": "",
+                        "description": null,
+                        "type": "Checkbox",
+                        "type_identifier": "checkbox",
+                        "group": "Foo group",
+                        "position": 2,
+                        "options": [],
+                        "value": null,
+                        "extra_options": []
+                    }
+                },
+                {
+                    "_media-type": "application\/vnd.ibexa.api.AttributeAssignment+json",
+                    "is_required": false,
+                    "is_discriminator": false,
+                    "Attribute": {
+                        "_media-type": "application\/vnd.ibexa.api.Attribute+json",
+                        "identifier": "foo_integer",
+                        "name": "",
+                        "description": null,
+                        "type": "Integer",
+                        "type_identifier": "integer",
+                        "group": "Foo group",
+                        "position": 3,
+                        "options": [],
+                        "value": null,
+                        "extra_options": []
+                    }
+                },
+                {
+                    "_media-type": "application\/vnd.ibexa.api.AttributeAssignment+json",
+                    "is_required": false,
+                    "is_discriminator": false,
+                    "Attribute": {
+                        "_media-type": "application\/vnd.ibexa.api.Attribute+json",
+                        "identifier": "foo_float",
+                        "name": "",
+                        "description": null,
+                        "type": "Float",
+                        "type_identifier": "float",
+                        "group": "Foo group",
+                        "position": 4,
+                        "options": [],
+                        "value": null,
+                        "extra_options": []
+                    }
+                },
+                {
+                    "_media-type": "application\/vnd.ibexa.api.AttributeAssignment+json",
+                    "is_required": false,
+                    "is_discriminator": false,
+                    "Attribute": {
+                        "_media-type": "application\/vnd.ibexa.api.Attribute+json",
+                        "identifier": "foo_selection",
+                        "name": "",
+                        "description": null,
+                        "type": "Selection",
+                        "type_identifier": "selection",
+                        "group": "Foo group",
+                        "position": 5,
+                        "options": {
+                            "choices": [
+                                {
+                                    "value": "first",
+                                    "label": "first option"
+                                },
+                                {
+                                    "value": "second",
+                                    "label": "second option"
+                                }
+                            ]
+                        },
+                        "value": null,
+                        "extra_options": []
+                    }
+                },
+                {
+                    "_media-type": "application\/vnd.ibexa.api.AttributeAssignment+json",
+                    "is_required": false,
+                    "is_discriminator": false,
+                    "Attribute": {
+                        "_media-type": "application\/vnd.ibexa.api.Attribute+json",
+                        "identifier": "foo_color",
+                        "name": "",
+                        "description": null,
+                        "type": "Color",
+                        "type_identifier": "color",
+                        "group": "Foo group",
+                        "position": 5,
+                        "options": {
+                            "choices": [
+                                {
+                                    "value": "first",
+                                    "label": "first option"
+                                },
+                                {
+                                    "value": "second",
+                                    "label": "second option"
+                                }
+                            ]
+                        },
+                        "value": null,
+                        "extra_options": []
+                    }
+                }
+            ]
+        },
+        "Content": {
+            "_media-type": "application\/vnd.ibexa.api.Content+json",
+            "_href": "\/api\/ibexa\/v2\/content\/objects\/78",
+            "_remoteId": "9d8fa6912e9037cd0e88111af90c64ff",
+            "_id": 78,
+            "ContentType": {
+                "_media-type": "application\/vnd.ibexa.api.ContentType+json",
+                "_href": "\/api\/ibexa\/v2\/content\/types\/46"
+            },
+            "Name": "new product",
+            "TranslatedName": "new product",
+            "Versions": {
+                "_media-type": "application\/vnd.ibexa.api.VersionList+json",
+                "_href": "\/api\/ibexa\/v2\/content\/objects\/78\/versions"
+            },
+            "CurrentVersion": {
+                "_media-type": "application\/vnd.ibexa.api.Version+json",
+                "_href": "\/api\/ibexa\/v2\/content\/objects\/78\/currentversion",
+                "Version": {
+                    "_media-type": "application\/vnd.ibexa.api.Version+json",
+                    "_href": "\/api\/ibexa\/v2\/content\/objects\/78\/versions\/1",
+                    "VersionInfo": {
+                        "id": 527,
+                        "versionNo": 1,
+                        "status": "PUBLISHED",
+                        "modificationDate": "2023-05-09T12:50:05+00:00",
+                        "Creator": {
+                            "_media-type": "application\/vnd.ibexa.api.User+json",
+                            "_href": "\/api\/ibexa\/v2\/user\/users\/14"
+                        },
+                        "creationDate": "2023-05-09T12:50:05+00:00",
+                        "initialLanguageCode": "eng-GB",
+                        "languageCodes": "eng-GB",
+                        "VersionTranslationInfo": {
+                            "_media-type": "application\/vnd.ibexa.api.VersionTranslationInfo+json",
+                            "Language": [
+                                {
+                                    "languageCode": "eng-GB"
+                                }
+                            ]
+                        },
+                        "names": {
+                            "value": [
+                                {
+                                    "_languageCode": "eng-GB",
+                                    "#text": "new product"
+                                }
+                            ]
+                        },
+                        "Content": {
+                            "_media-type": "application\/vnd.ibexa.api.ContentInfo+json",
+                            "_href": "\/api\/ibexa\/v2\/content\/objects\/78"
+                        }
+                    },
+                    "Fields": {
+                        "field": [
+                            {
+                                "id": 280,
+                                "fieldDefinitionIdentifier": "specification",
+                                "languageCode": "eng-GB",
+                                "fieldTypeIdentifier": "ibexa_product_specification",
+                                "fieldValue": {
+                                    "id": 13,
+                                    "code": "testProduct",
+                                    "attributes": [
+                                        true,
+                                        12,
+                                        12.5,
+                                        "first",
+                                        "#FFFFFF"
+                                    ]
+                                }
+                            },
+                            {
+                                "id": 281,
+                                "fieldDefinitionIdentifier": "name",
+                                "languageCode": "eng-GB",
+                                "fieldTypeIdentifier": "ezstring",
+                                "fieldValue": "new product"
+                            },
+                            {
+                                "id": 282,
+                                "fieldDefinitionIdentifier": "product_category",
+                                "languageCode": "eng-GB",
+                                "fieldTypeIdentifier": "ibexa_taxonomy_entry_assignment",
+                                "fieldValue": {
+                                    "taxonomy_entries": [],
+                                    "taxonomy": null
+                                }
+                            }
+                        ]
+                    },
+                    "Relations": {
+                        "_media-type": "application\/vnd.ibexa.api.RelationList+json",
+                        "_href": "\/api\/ibexa\/v2\/content\/objects\/78\/versions\/1\/relations",
+                        "Relation": []
+                    },
+                    "Thumbnail": {
+                        "_media-type": "application\/vnd.ibexa.api.Thumbnail+json",
+                        "resource": "\/bundles\/ibexaadminui\/img\/ibexa-icons.svg#file",
+                        "width": null,
+                        "height": null,
+                        "mimeType": "image\/svg+xml"
+                    }
+                }
+            },
+            "Section": {
+                "_media-type": "application\/vnd.ibexa.api.Section+json",
+                "_href": "\/api\/ibexa\/v2\/content\/sections\/1"
+            },
+            "Locations": {
+                "_media-type": "application\/vnd.ibexa.api.LocationList+json",
+                "_href": "\/api\/ibexa\/v2\/content\/objects\/78\/locations"
+            },
+            "Owner": {
+                "_media-type": "application\/vnd.ibexa.api.User+json",
+                "_href": "\/api\/ibexa\/v2\/user\/users\/14"
+            },
+            "lastModificationDate": "2023-05-09T12:50:05+00:00",
+            "publishedDate": "2023-05-09T12:50:05+00:00",
+            "mainLanguageCode": "eng-GB",
+            "currentVersionNo": 1,
+            "alwaysAvailable": true,
+            "isHidden": false,
+            "status": "PUBLISHED",
+            "ObjectStates": {
+                "_media-type": "application\/vnd.ibexa.api.ContentObjectStates+json",
+                "_href": "\/api\/ibexa\/v2\/content\/objects\/78\/objectstates"
+            }
+        },
+        "Thumbnail": {
+            "_media-type": "application\/vnd.ibexa.api.Thumbnail+json",
+            "resource": "\/bundles\/ibexaadminui\/img\/ibexa-icons.svg#file",
+            "width": null,
+            "height": null,
+            "mimeType": "image\/svg+xml"
+        },
+        "created_at": 1683636605,
+        "updated_at": 1683636605,
+        "AttributesList": [
+            {
+                "_media-type": "application\/vnd.ibexa.api.Attribute+json",
+                "identifier": "foo_boolean",
+                "name": "",
+                "description": null,
+                "type": "Checkbox",
+                "type_identifier": "checkbox",
+                "group": "Foo group",
+                "position": 2,
+                "options": [],
+                "value": true,
+                "extra_options": []
+            },
+            {
+                "_media-type": "application\/vnd.ibexa.api.Attribute+json",
+                "identifier": "foo_integer",
+                "name": "",
+                "description": null,
+                "type": "Integer",
+                "type_identifier": "integer",
+                "group": "Foo group",
+                "position": 3,
+                "options": [],
+                "value": 12,
+                "extra_options": []
+            },
+            {
+                "_media-type": "application\/vnd.ibexa.api.Attribute+json",
+                "identifier": "foo_float",
+                "name": "",
+                "description": null,
+                "type": "Float",
+                "type_identifier": "float",
+                "group": "Foo group",
+                "position": 4,
+                "options": [],
+                "value": 12.5,
+                "extra_options": []
+            },
+            {
+                "_media-type": "application\/vnd.ibexa.api.Attribute+json",
+                "identifier": "foo_selection",
+                "name": "",
+                "description": null,
+                "type": "Selection",
+                "type_identifier": "selection",
+                "group": "Foo group",
+                "position": 5,
+                "options": {
+                    "choices": [
+                        {
+                            "value": "first",
+                            "label": "first option"
+                        },
+                        {
+                            "value": "second",
+                            "label": "second option"
+                        }
+                    ]
+                },
+                "value": "first",
+                "extra_options": []
+            },
+            {
+                "_media-type": "application\/vnd.ibexa.api.Attribute+json",
+                "identifier": "foo_color",
+                "name": "",
+                "description": null,
+                "type": "Color",
+                "type_identifier": "color",
+                "group": "Foo group",
+                "position": 5,
+                "options": {
+                    "choices": [
+                        {
+                            "value": "first",
+                            "label": "first option"
+                        },
+                        {
+                            "value": "second",
+                            "label": "second option"
+                        }
+                    ]
+                },
+                "value": "#FFFFFF",
+                "extra_options": []
+            }
+        ]
+    }
+}

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Product media-type="application/vnd.ibexa.api.Product+xml">
+ <code>0001</code>
+ <isBaseProduct></isBaseProduct>
+ <isVariant></isVariant>
+ <name>Dress A</name>
+ <ProductType media-type="application/vnd.ibexa.api.ProductType+xml">
+  <identifier>dress</identifier>
+  <name>Dress</name>
+  <AttributeAssignment media-type="application/vnd.ibexa.api.AttributeAssignment+xml">
+   <is_required>1</is_required>
+   <is_discriminator></is_discriminator>
+   <Attribute media-type="application/vnd.ibexa.api.Attribute+xml">
+    <identifier>foo</identifier>
+    <name>Foo</name>
+    <description>Description foo</description>
+    <type>Integer</type>
+    <type_identifier>integer</type_identifier>
+    <group>Dimensions</group>
+    <position>0</position>
+    <options>
+     <value key="min">10</value>
+     <value key="max">100</value>
+    </options>
+    <value/>
+    <extra_options/>
+   </Attribute>
+  </AttributeAssignment>
+  <AttributeAssignment media-type="application/vnd.ibexa.api.AttributeAssignment+xml">
+   <is_required></is_required>
+   <is_discriminator></is_discriminator>
+   <Attribute media-type="application/vnd.ibexa.api.Attribute+xml">
+    <identifier>bar</identifier>
+    <name>Bar</name>
+    <description>Description bar</description>
+    <type>Checkbox</type>
+    <type_identifier>checkbox</type_identifier>
+    <group>Dimensions</group>
+    <position>1</position>
+    <options/>
+    <value/>
+    <extra_options/>
+   </Attribute>
+  </AttributeAssignment>
+  <AttributeAssignment media-type="application/vnd.ibexa.api.AttributeAssignment+xml">
+   <is_required>1</is_required>
+   <is_discriminator></is_discriminator>
+   <Attribute media-type="application/vnd.ibexa.api.Attribute+xml">
+    <identifier>baz</identifier>
+    <name>Baz</name>
+    <description>Description baz</description>
+    <type>Integer</type>
+    <type_identifier>integer</type_identifier>
+    <group>Dimensions</group>
+    <position>2</position>
+    <options/>
+    <value/>
+    <extra_options/>
+   </Attribute>
+  </AttributeAssignment>
+ </ProductType>
+ <Content media-type="application/vnd.ibexa.api.Content+xml" href="/api/ibexa/v2/content/objects/66" remoteId="DRESS_0001" id="66">
+  <ContentType media-type="application/vnd.ibexa.api.ContentType+xml" href="/api/ibexa/v2/content/types/39"/>
+  <Name>Dress A</Name>
+  <TranslatedName>Dress A</TranslatedName>
+  <Versions media-type="application/vnd.ibexa.api.VersionList+xml" href="/api/ibexa/v2/content/objects/66/versions"/>
+  <CurrentVersion media-type="application/vnd.ibexa.api.Version+xml" href="/api/ibexa/v2/content/objects/66/currentversion">
+   <Version media-type="application/vnd.ibexa.api.Version+xml" href="/api/ibexa/v2/content/objects/66/versions/1">
+    <VersionInfo>
+     <id>515</id>
+     <versionNo>1</versionNo>
+     <status>PUBLISHED</status>
+     <modificationDate>2023-05-09T12:49:00+00:00</modificationDate>
+     <Creator media-type="application/vnd.ibexa.api.User+xml" href="/api/ibexa/v2/user/users/14"/>
+     <creationDate>2021-07-26T05:45:17+00:00</creationDate>
+     <initialLanguageCode>eng-GB</initialLanguageCode>
+     <languageCodes>ger-DE,eng-GB</languageCodes>
+     <VersionTranslationInfo media-type="application/vnd.ibexa.api.VersionTranslationInfo+xml">
+      <Language>
+       <languageCode>ger-DE</languageCode>
+      </Language>
+      <Language>
+       <languageCode>eng-GB</languageCode>
+      </Language>
+     </VersionTranslationInfo>
+     <names>
+      <value languageCode="eng-GB">Dress A</value>
+      <value languageCode="ger-DE">Dress A German</value>
+     </names>
+     <Content media-type="application/vnd.ibexa.api.ContentInfo+xml" href="/api/ibexa/v2/content/objects/66"/>
+    </VersionInfo>
+    <Fields>
+     <field>
+      <id>242</id>
+      <fieldDefinitionIdentifier>specification</fieldDefinitionIdentifier>
+      <languageCode>eng-GB</languageCode>
+      <fieldTypeIdentifier>ibexa_product_specification</fieldTypeIdentifier>
+      <fieldValue>
+       <value key="id">1</value>
+       <value key="code">0001</value>
+       <value key="attributes">
+        <value>42</value>
+       </value>
+      </fieldValue>
+     </field>
+     <field>
+      <id>245</id>
+      <fieldDefinitionIdentifier>specification</fieldDefinitionIdentifier>
+      <languageCode>ger-DE</languageCode>
+      <fieldTypeIdentifier>ibexa_product_specification</fieldTypeIdentifier>
+      <fieldValue>
+       <value key="id">1</value>
+       <value key="code">0001</value>
+       <value key="attributes">
+        <value>42</value>
+       </value>
+      </fieldValue>
+     </field>
+     <field>
+      <id>243</id>
+      <fieldDefinitionIdentifier>name</fieldDefinitionIdentifier>
+      <languageCode>eng-GB</languageCode>
+      <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+      <fieldValue>Dress A</fieldValue>
+     </field>
+     <field>
+      <id>244</id>
+      <fieldDefinitionIdentifier>name</fieldDefinitionIdentifier>
+      <languageCode>ger-DE</languageCode>
+      <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+      <fieldValue>Dress A German</fieldValue>
+     </field>
+    </Fields>
+    <Relations media-type="application/vnd.ibexa.api.RelationList+xml" href="/api/ibexa/v2/content/objects/66/versions/1/relations"/>
+    <Thumbnail media-type="application/vnd.ibexa.api.Thumbnail+xml">
+     <resource>/bundles/ibexaadminui/img/ibexa-icons.svg#file</resource>
+     <width></width>
+     <height></height>
+     <mimeType>image/svg+xml</mimeType>
+    </Thumbnail>
+   </Version>
+  </CurrentVersion>
+  <Section media-type="application/vnd.ibexa.api.Section+xml" href="/api/ibexa/v2/content/sections/1"/>
+  <Locations media-type="application/vnd.ibexa.api.LocationList+xml" href="/api/ibexa/v2/content/objects/66/locations"/>
+  <Owner media-type="application/vnd.ibexa.api.User+xml" href="/api/ibexa/v2/user/users/14"/>
+  <lastModificationDate>2023-05-09T12:49:00+00:00</lastModificationDate>
+  <publishedDate>2023-05-09T12:49:00+00:00</publishedDate>
+  <mainLanguageCode>eng-GB</mainLanguageCode>
+  <currentVersionNo>1</currentVersionNo>
+  <alwaysAvailable>true</alwaysAvailable>
+  <isHidden>false</isHidden>
+  <status>PUBLISHED</status>
+  <ObjectStates media-type="application/vnd.ibexa.api.ContentObjectStates+xml" href="/api/ibexa/v2/content/objects/66/objectstates"/>
+ </Content>
+ <Thumbnail media-type="application/vnd.ibexa.api.Thumbnail+xml">
+  <resource>/bundles/ibexaadminui/img/ibexa-icons.svg#file</resource>
+  <width></width>
+  <height></height>
+  <mimeType>image/svg+xml</mimeType>
+ </Thumbnail>
+ <created_at>1627278317</created_at>
+ <updated_at>1683636540</updated_at>
+ <Attribute media-type="application/vnd.ibexa.api.Attribute+xml">
+  <identifier>foo</identifier>
+  <name>Foo</name>
+  <description>Description foo</description>
+  <type>Integer</type>
+  <type_identifier>integer</type_identifier>
+  <group>Dimensions</group>
+  <position>0</position>
+  <options>
+   <value key="min">10</value>
+   <value key="max">100</value>
+  </options>
+  <value>42</value>
+  <extra_options/>
+ </Attribute>
+</Product>
