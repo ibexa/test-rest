@@ -24,7 +24,7 @@ final class SnapshotReplacerTest extends TestCase
      * @dataProvider provideForXmlDateReplacements
      * @dataProvider provideForJsonDateReplacements
      */
-    public function testXmlDateReplacements(
+    public function testReplacements(
         string $input,
         string $expectedOutput
     ): void {
