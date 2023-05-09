@@ -45,14 +45,9 @@ final class SnapshotReplacer
     /** @var array<non-empty-string, non-empty-string> */
     public array $replacementMap = [];
 
-    /**
-     * @return $this
-     */
-    public function clearReplacementsMap(): self
+    public function clearReplacementsMap(): void
     {
         $this->replacementMap = [];
-
-        return $this;
     }
 
     public function withJsonReplacements(): void
