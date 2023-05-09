@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
@@ -84,6 +85,10 @@ final class SnapshotReplacerTest extends TestCase
         $content = file_get_contents($location);
         if ($content === false) {
             throw new \LogicException(sprintf('Unable to load file: %s', $location));
+        }
+
+        if (empty($content)) {
+            throw new \LogicException(sprintf('Loaded file is empty: %s', $location));
         }
 
         return $content;
