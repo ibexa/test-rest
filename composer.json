@@ -5,9 +5,6 @@
   "keywords": [
     "ibexa-dxp"
   ],
-  "repositories": [
-    {"type": "github", "url": "git@github.com:ibexa/test-core.git"}
-  ],
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
