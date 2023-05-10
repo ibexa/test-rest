@@ -39,7 +39,7 @@ final class WebTestCaseTest extends WebTestCase
         ]);
 
         self::assertFalse($validator->isValid());
-        self::assertEquals([
+        $expectedErrors = [
             [
                 'property' => 'data',
                 'pointer' => '/data',
@@ -61,7 +61,8 @@ final class WebTestCaseTest extends WebTestCase
                 'constraint' => 'oneOf',
                 'context' => 1,
             ],
-        ], $validator->getErrors());
+        ];
+        self::assertEquals($expectedErrors, $validator->getErrors());
     }
 
     private function decodeJsonObject(string $content): object
