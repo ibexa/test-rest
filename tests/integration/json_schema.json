@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "data": {
+      "oneOf": [
+        { "$ref": "internal://basic_types#definitions/integerData" },
+        { "$ref": "internal://basic_types#definitions/stringData" }
+      ]
+    }
+  },
+  "required": ["data"]
+}

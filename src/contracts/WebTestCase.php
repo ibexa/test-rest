@@ -10,6 +10,9 @@ namespace Ibexa\Contracts\Test\Rest;
 
 use Ibexa\Contracts\Test\Core\IbexaKernelTestTrait;
 use Ibexa\Core\MVC\Symfony\Security\UserWrapped;
+use JsonSchema\SchemaStorageInterface;
+use JsonSchema\Validator;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as SymfonyWebTestCase;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -69,6 +72,34 @@ abstract class WebTestCase extends SymfonyWebTestCase
         self::assertStringMatchesSnapshot($content, 'json', $file);
     }
 
+    protected static function getJsonSchemaValidator(): Validator
+    {
+        $validator = self::getContainer()->get('ibexa.test.rest.json_schema.validator');
+        if (!$validator instanceof Validator) {
+            throw new LogicException(sprintf(
+                '%s service is not an instance of %s.',
+                'ibexa.test.rest.json_schema.validator',
+                Validator::class,
+            ));
+        }
+
+        return $validator;
+    }
+
+    protected static function getJsonSchemaStorage(): SchemaStorageInterface
+    {
+        $storage = self::getContainer()->get('ibexa.test.rest.json_schema.schema_storage');
+        if (!$storage instanceof SchemaStorageInterface) {
+            throw new LogicException(sprintf(
+                '%s service is not an instance of %s.',
+                'ibexa.test.rest.json_schema.schema_storage',
+                Validator::class,
+            ));
+        }
+
+        return $storage;
+    }
+
     /**
      * @phpstan-param "xml"|"json"|null $type
      */
@@ -117,7 +148,7 @@ abstract class WebTestCase extends SymfonyWebTestCase
         $classInfo = new \ReflectionClass(static::class);
         $classFilename = $classInfo->getFileName();
         if (false === $classFilename) {
-            throw new \LogicException(
+            throw new LogicException(
                 sprintf(
                     'Failed acquiring directory location for %s',
                     static::class,

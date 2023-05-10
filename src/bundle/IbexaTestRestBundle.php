@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\Bundle\TestRest;
+namespace Ibexa\Bundle\Test\Rest;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

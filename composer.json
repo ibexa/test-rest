@@ -10,7 +10,12 @@
   "require": {
     "php": "^7.4 || ^8.0",
     "ext-json": "*",
-    "ibexa/test-core": "dev-added-test-core as 0.1.x-dev"
+    "ibexa/test-core": "dev-added-test-core as 0.1.x-dev",
+    "symfony/browser-kit": "^5.4",
+    "symfony/mime": "^5.4",
+    "symfony/proxy-manager-bridge": "^5.4",
+    "symfony/translation": "^5.4",
+    "symfony/validator": "^5.4"
   },
   "require-dev": {
     "ibexa/code-style": "^1.1",
