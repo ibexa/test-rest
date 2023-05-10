@@ -84,10 +84,12 @@ abstract class WebTestCase extends SymfonyWebTestCase
             $file = self::getDirectory() . '/_output/' . $class . '.' . ($type ?? 'log');
         }
 
-        self::createDirectoryIfNotExists($file);
+        if (getenv('TEST_REST_GENERATE_SNAPSHOTS')) {
+            self::createDirectoryIfNotExists($file);
 
-        if (!file_exists($file)) {
-            file_put_contents($file, rtrim($content, "\n") . "\n");
+            if (!file_exists($file)) {
+                file_put_contents($file, rtrim($content, "\n") . "\n");
+            }
         }
 
         if ($type === 'xml') {
