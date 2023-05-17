@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Ibexa\Contracts\Test\Rest;
 
 use Ibexa\Contracts\Core\Test\IbexaTestKernelInterface;
-use Ibexa\Contracts\Test\Core\IbexaKernelTestTrait;
 use Ibexa\Contracts\Test\Core\IbexaTestCore;
 use Ibexa\Contracts\Test\Core\IbexaTestCoreInterface;
 use Ibexa\Contracts\Test\Core\IbexaTestKernel;
