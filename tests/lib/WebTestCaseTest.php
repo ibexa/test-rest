@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Test\Rest;
 
-use Ibexa\Contracts\Test\Rest\WebTestCase as BaseWebTestCase;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 
@@ -24,7 +23,7 @@ final class WebTestCaseTest extends TestCase
         ?string $type,
         ?string $file = null
     ): void {
-        $testCase = new WebTestCase();
+        $testCase = new TestCaseSample();
         $testCase->testComparison($snapshotContent, $type, $file);
 
         self::assertCount(1, $testCase);
@@ -65,7 +64,7 @@ final class WebTestCaseTest extends TestCase
         ?string $file = null,
         ?string $expectationMessage = null
     ): void {
-        $testCase = new WebTestCase();
+        $testCase = new TestCaseSample();
 
         try {
             $testCase->testComparison($snapshotContent, $type, $file);
@@ -108,20 +107,5 @@ final class WebTestCaseTest extends TestCase
             __DIR__ . '/_output/different-json.json',
             '"text": "Lorem ipsum dolor sit amet, foobar."',
         ];
-    }
-}
-
-final class WebTestCase extends BaseWebTestCase
-{
-    /**
-     * @param "json"|"xml"|null $type
-     */
-    public function testComparison(string $snapshotContent, ?string $type, ?string $file): void
-    {
-        self::assertStringMatchesSnapshot(
-            $snapshotContent,
-            $type,
-            $file,
-        );
     }
 }
