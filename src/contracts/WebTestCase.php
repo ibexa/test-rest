@@ -8,7 +8,11 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Test\Rest;
 
+use Ibexa\Contracts\Core\Test\IbexaTestKernelInterface;
 use Ibexa\Contracts\Test\Core\IbexaKernelTestTrait;
+use Ibexa\Contracts\Test\Core\IbexaTestCore;
+use Ibexa\Contracts\Test\Core\IbexaTestCoreInterface;
+use Ibexa\Contracts\Test\Core\IbexaTestKernel;
 use Ibexa\Core\MVC\Symfony\Security\UserWrapped;
 use JsonSchema\SchemaStorageInterface;
 use JsonSchema\Validator;
@@ -19,7 +23,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class WebTestCase extends SymfonyWebTestCase
 {
-    use IbexaKernelTestTrait;
+    private IbexaTestCoreInterface $ibexaCore;
 
     protected KernelBrowser $client;
 
@@ -31,9 +35,39 @@ abstract class WebTestCase extends SymfonyWebTestCase
         $this->client->loginUser($user);
     }
 
+    protected static function getKernelClass(): string
+    {
+        try {
+            return parent::getKernelClass();
+        } catch (LogicException $e) {
+            return IbexaTestKernel::class;
+        }
+    }
+
+    protected function getIbexaTestCore(): IbexaTestCoreInterface
+    {
+        if (!self::$booted) {
+            self::bootKernel();
+        }
+
+        if (!isset($this->ibexaCore)) {
+            if (!self::$kernel instanceof IbexaTestKernelInterface) {
+                throw new \LogicException(sprintf(
+                    '%s requires %s as an argument, but received %s. Ensure that KERNEL_CLASS env variable is set properly.',
+                    IbexaTestCore::class,
+                    IbexaTestKernelInterface::class,
+                    get_debug_type(self::$kernel),
+                ));
+            }
+            $this->ibexaCore = new IbexaTestCore(self::getContainer(), self::$kernel);
+        }
+
+        return $this->ibexaCore;
+    }
+
     private function getUser(): UserWrapped
     {
-        $userService = self::getUserService();
+        $userService = $this->getIbexaTestCore()->getUserService();
         $apiUser = $userService->loadUserByLogin('admin');
         $symfonyUser = $this->createMock(UserInterface::class);
         $symfonyUser->method('getRoles')->willReturn(['ROLE_USER']);
