@@ -1,0 +1,243 @@
+{
+    "Product": {
+        "_media-type": "application\/vnd.ibexa.api.Product+json",
+        "code": "0001",
+        "isBaseProduct": false,
+        "isVariant": false,
+        "name": "Dress A",
+        "ProductType": {
+            "_media-type": "application\/vnd.ibexa.api.ProductType+json",
+            "identifier": "dress",
+            "name": "Dress",
+            "AttributeAssignmentList": [
+                {
+                    "_media-type": "application\/vnd.ibexa.api.AttributeAssignment+json",
+                    "is_required": true,
+                    "is_discriminator": false,
+                    "Attribute": {
+                        "_media-type": "application\/vnd.ibexa.api.Attribute+json",
+                        "identifier": "foo",
+                        "name": "Foo",
+                        "description": "Description foo",
+                        "type": "Integer",
+                        "type_identifier": "integer",
+                        "group": "Dimensions",
+                        "position": 0,
+                        "options": {
+                            "min": 10,
+                            "max": 100
+                        },
+                        "value": null,
+                        "extra_options": []
+                    }
+                },
+                {
+                    "_media-type": "application\/vnd.ibexa.api.AttributeAssignment+json",
+                    "is_required": false,
+                    "is_discriminator": false,
+                    "Attribute": {
+                        "_media-type": "application\/vnd.ibexa.api.Attribute+json",
+                        "identifier": "bar",
+                        "name": "Bar",
+                        "description": "Description bar",
+                        "type": "Checkbox",
+                        "type_identifier": "checkbox",
+                        "group": "Dimensions",
+                        "position": 1,
+                        "options": [],
+                        "value": null,
+                        "extra_options": []
+                    }
+                },
+                {
+                    "_media-type": "application\/vnd.ibexa.api.AttributeAssignment+json",
+                    "is_required": true,
+                    "is_discriminator": false,
+                    "Attribute": {
+                        "_media-type": "application\/vnd.ibexa.api.Attribute+json",
+                        "identifier": "baz",
+                        "name": "Baz",
+                        "description": "Description baz",
+                        "type": "Integer",
+                        "type_identifier": "integer",
+                        "group": "Dimensions",
+                        "position": 2,
+                        "options": [],
+                        "value": null,
+                        "extra_options": []
+                    }
+                }
+            ]
+        },
+        "Content": {
+            "_media-type": "application\/vnd.ibexa.api.Content+json",
+            "_href": "\/api\/ibexa\/v2\/content\/objects\/66",
+            "_remoteId": "DRESS_0001",
+            "_id": 66,
+            "ContentType": {
+                "_media-type": "application\/vnd.ibexa.api.ContentType+json",
+                "_href": "\/api\/ibexa\/v2\/content\/types\/39"
+            },
+            "Name": "Dress A",
+            "TranslatedName": "Dress A",
+            "Versions": {
+                "_media-type": "application\/vnd.ibexa.api.VersionList+json",
+                "_href": "\/api\/ibexa\/v2\/content\/objects\/66\/versions"
+            },
+            "CurrentVersion": {
+                "_media-type": "application\/vnd.ibexa.api.Version+json",
+                "_href": "\/api\/ibexa\/v2\/content\/objects\/66\/currentversion",
+                "Version": {
+                    "_media-type": "application\/vnd.ibexa.api.Version+json",
+                    "_href": "\/api\/ibexa\/v2\/content\/objects\/66\/versions\/1",
+                    "VersionInfo": {
+                        "id": 515,
+                        "versionNo": 1,
+                        "status": "PUBLISHED",
+                        "modificationDate": "2023-05-09T12:49:00+00:00",
+                        "Creator": {
+                            "_media-type": "application\/vnd.ibexa.api.User+json",
+                            "_href": "\/api\/ibexa\/v2\/user\/users\/14"
+                        },
+                        "creationDate": "2021-07-26T05:45:17+00:00",
+                        "initialLanguageCode": "eng-GB",
+                        "languageCodes": "ger-DE,eng-GB",
+                        "VersionTranslationInfo": {
+                            "_media-type": "application\/vnd.ibexa.api.VersionTranslationInfo+json",
+                            "Language": [
+                                {
+                                    "languageCode": "ger-DE"
+                                },
+                                {
+                                    "languageCode": "eng-GB"
+                                }
+                            ]
+                        },
+                        "names": {
+                            "value": [
+                                {
+                                    "_languageCode": "eng-GB",
+                                    "#text": "Dress A"
+                                },
+                                {
+                                    "_languageCode": "ger-DE",
+                                    "#text": "Dress A German"
+                                }
+                            ]
+                        },
+                        "Content": {
+                            "_media-type": "application\/vnd.ibexa.api.ContentInfo+json",
+                            "_href": "\/api\/ibexa\/v2\/content\/objects\/66"
+                        }
+                    },
+                    "Fields": {
+                        "field": [
+                            {
+                                "id": 242,
+                                "fieldDefinitionIdentifier": "specification",
+                                "languageCode": "eng-GB",
+                                "fieldTypeIdentifier": "ibexa_product_specification",
+                                "fieldValue": {
+                                    "id": 1,
+                                    "code": "0001",
+                                    "attributes": [
+                                        42
+                                    ]
+                                }
+                            },
+                            {
+                                "id": 245,
+                                "fieldDefinitionIdentifier": "specification",
+                                "languageCode": "ger-DE",
+                                "fieldTypeIdentifier": "ibexa_product_specification",
+                                "fieldValue": {
+                                    "id": 1,
+                                    "code": "0001",
+                                    "attributes": [
+                                        42
+                                    ]
+                                }
+                            },
+                            {
+                                "id": 243,
+                                "fieldDefinitionIdentifier": "name",
+                                "languageCode": "eng-GB",
+                                "fieldTypeIdentifier": "ezstring",
+                                "fieldValue": "Dress A"
+                            },
+                            {
+                                "id": 244,
+                                "fieldDefinitionIdentifier": "name",
+                                "languageCode": "ger-DE",
+                                "fieldTypeIdentifier": "ezstring",
+                                "fieldValue": "Dress A German"
+                            }
+                        ]
+                    },
+                    "Relations": {
+                        "_media-type": "application\/vnd.ibexa.api.RelationList+json",
+                        "_href": "\/api\/ibexa\/v2\/content\/objects\/66\/versions\/1\/relations",
+                        "Relation": []
+                    },
+                    "Thumbnail": {
+                        "_media-type": "application\/vnd.ibexa.api.Thumbnail+json",
+                        "resource": "\/bundles\/ibexaadminui\/img\/ibexa-icons.svg#file",
+                        "width": null,
+                        "height": null,
+                        "mimeType": "image\/svg+xml"
+                    }
+                }
+            },
+            "Section": {
+                "_media-type": "application\/vnd.ibexa.api.Section+json",
+                "_href": "\/api\/ibexa\/v2\/content\/sections\/1"
+            },
+            "Locations": {
+                "_media-type": "application\/vnd.ibexa.api.LocationList+json",
+                "_href": "\/api\/ibexa\/v2\/content\/objects\/66\/locations"
+            },
+            "Owner": {
+                "_media-type": "application\/vnd.ibexa.api.User+json",
+                "_href": "\/api\/ibexa\/v2\/user\/users\/14"
+            },
+            "lastModificationDate": "2023-05-09T12:49:00+00:00",
+            "publishedDate": "2023-05-09T12:49:00+00:00",
+            "mainLanguageCode": "eng-GB",
+            "currentVersionNo": 1,
+            "alwaysAvailable": true,
+            "isHidden": false,
+            "status": "PUBLISHED",
+            "ObjectStates": {
+                "_media-type": "application\/vnd.ibexa.api.ContentObjectStates+json",
+                "_href": "\/api\/ibexa\/v2\/content\/objects\/66\/objectstates"
+            }
+        },
+        "Thumbnail": {
+            "_media-type": "application\/vnd.ibexa.api.Thumbnail+json",
+            "resource": "\/bundles\/ibexaadminui\/img\/ibexa-icons.svg#file",
+            "width": null,
+            "height": null,
+            "mimeType": "image\/svg+xml"
+        },
+        "created_at": 1627278317,
+        "updated_at": 1683636540,
+        "AttributesList": [
+            {
+                "_media-type": "application\/vnd.ibexa.api.Attribute+json",
+                "identifier": "foo",
+                "name": "Foo",
+                "description": "Description foo",
+                "type": "Integer",
+                "type_identifier": "integer",
+                "group": "Dimensions",
+                "position": 0,
+                "options": {
+                    "min": 10,
+                    "max": 100
+                },
+                "value": 42,
+                "extra_options": []
+            }
+        ]
+    }
+}

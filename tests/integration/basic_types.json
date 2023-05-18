@@ -1,0 +1,11 @@
+{
+  "definitions": {
+    "integerData" : {
+      "type": "integer",
+      "minimum" : 0
+    },
+    "stringData" : {
+      "type": "string"
+    }
+  }
+}
