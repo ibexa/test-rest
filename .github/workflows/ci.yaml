@@ -91,4 +91,4 @@ jobs:
 
       - name: Compose check
         run: |
-          composer info -D --format=json "ibexa/*" | jq --exit-status '[.installed[].version | select(match("^dev-")) | test("^dev-(main|[0-9]+.[0-9]+)")] | all'
+          composer info -D --format=json "ibexa/*" | jq --exit-status '[.installed[].version | select(test("^dev-")) | test("^dev-(main|[0-9]+.[0-9]+)")] | all'
