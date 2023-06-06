@@ -70,6 +70,7 @@ abstract class WebTestCase extends SymfonyWebTestCase
         $apiUser = $userService->loadUserByLogin('admin');
         $symfonyUser = $this->createMock(UserInterface::class);
         $symfonyUser->method('getRoles')->willReturn(['ROLE_USER']);
+        $symfonyUser->method('getUsername')->willReturn('admin');
 
         return new UserWrapped($symfonyUser, $apiUser);
     }
