@@ -22,12 +22,16 @@ abstract class BaseRestWebTestCase extends WebTestCase
     /**
      * @return iterable<\Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition>
      */
-    abstract public static function getEndpointsToTest(): iterable;
+    protected static function getEndpointsToTest(): iterable
+    {
+        yield from [];
+
+        self::fail(sprintf('%s needs to implement %s method', static::class, __METHOD__));
+    }
 
     /**
      * @dataProvider getEndpointsData
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\Exception
      * @throws \JsonException
      */
     public function testEndpoint(EndpointRequestDefinition $endpointDefinition): void
