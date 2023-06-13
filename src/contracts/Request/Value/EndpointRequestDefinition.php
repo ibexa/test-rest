@@ -17,6 +17,8 @@ final class EndpointRequestDefinition implements Stringable
 
     private string $uri;
 
+    private ?string $resourceType;
+
     /** @var array<string, string> */
     private array $headers;
 
@@ -36,6 +38,7 @@ final class EndpointRequestDefinition implements Stringable
     public function __construct(
         string $method,
         string $uri,
+        ?string $resourceType,
         array $headers = [],
         ?InputPayload $payload = null,
         ?string $name = null,
@@ -43,6 +46,7 @@ final class EndpointRequestDefinition implements Stringable
     ) {
         $this->method = $method;
         $this->uri = $uri;
+        $this->resourceType = $resourceType;
         $this->headers = $headers;
         $this->payload = $payload;
         $this->name = $name;
@@ -57,6 +61,11 @@ final class EndpointRequestDefinition implements Stringable
     public function getUri(): string
     {
         return $this->uri;
+    }
+
+    public function getResourceType(): ?string
+    {
+        return $this->resourceType;
     }
 
     public function __toString(): string
