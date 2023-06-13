@@ -10,5 +10,5 @@ namespace Ibexa\Contracts\Test\Rest\Schema;
 
 interface ValidatorInterface
 {
-    public function validate(string $data, string $schemaName): void;
+    public function validate(string $data, string $schemaFilePath): void;
 }

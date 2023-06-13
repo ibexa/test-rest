@@ -1,15 +1,10 @@
-parameters:
-    ibexa.test.rest.schema.directory: ~
-
 services:
     Ibexa\Test\Rest\Schema\Validator\SchemaValidatorRegistry:
         public: true
         arguments:
             $validators: !tagged_iterator { tag: ibexa.test.rest.schema.validator, index_by: format }
 
-    Ibexa\Test\Rest\Schema\Validator\BaseSchemaValidator:
-        arguments:
-            $schemaDirectory: '%ibexa.test.rest.schema.directory%'
+    Ibexa\Test\Rest\Schema\Validator\BaseSchemaValidator: ~
 
     Ibexa\Test\Rest\Schema\Validator\JsonSchemaValidator:
         parent: Ibexa\Test\Rest\Schema\Validator\BaseSchemaValidator

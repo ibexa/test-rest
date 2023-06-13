@@ -17,7 +17,7 @@ abstract class BaseRestWebTestCase extends WebTestCase
 {
     public const REQUIRED_FORMATS = ['xml', 'json'];
 
-    abstract protected function getExpectedResourceType(): ?string;
+    abstract protected function getSchemaFileBasePath(string $resourceType, string $format): string;
 
     /**
      * @return iterable<\Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition>
@@ -139,7 +139,7 @@ abstract class BaseRestWebTestCase extends WebTestCase
         string $format
     ): void {
         $validator = $this->getSchemaValidator($format);
-        $validator->validate($response, $resourceType);
+        $validator->validate($response, $this->getSchemaFileBasePath($resourceType, $format));
     }
 
     private function getSchemaValidator(string $format): ValidatorInterface

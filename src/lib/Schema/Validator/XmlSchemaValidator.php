@@ -10,10 +10,10 @@ namespace Ibexa\Test\Rest\Schema\Validator;
 
 final class XmlSchemaValidator extends BaseSchemaValidator
 {
-    public function validate(string $data, string $schemaName): void
+    public function validate(string $data, string $schemaFilePath): void
     {
         $xmlDocument = new \DOMDocument();
         $xmlDocument->loadXML($data);
-        $xmlDocument->schemaValidate($this->buildSchemaFilePath($schemaName, 'xsd'));
+        $xmlDocument->schemaValidate($this->buildSchemaFilePath($schemaFilePath, 'xsd'));
     }
 }
