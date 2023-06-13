@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Test\Rest;
 
-use Ibexa\Contracts\Test\Rest\Input\Value\InputPayload;
 use Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition;
 use Ibexa\Contracts\Test\Rest\Schema\ValidatorInterface;
 use Ibexa\Test\Rest\Schema\Validator\SchemaValidatorRegistry;
+use Symfony\Component\HttpFoundation\Response;
 
 abstract class BaseRestWebTestCase extends WebTestCase
 {
@@ -36,19 +36,18 @@ abstract class BaseRestWebTestCase extends WebTestCase
      */
     public function testEndpoint(EndpointRequestDefinition $endpointDefinition): void
     {
-        $method = $endpointDefinition->getMethod();
-        $uri = $endpointDefinition->getUri();
-
         /** @phpstan-var 'xml'|'json' $format */
         $format = $endpointDefinition->getFormat();
         self::assertContains($format, self::REQUIRED_FORMATS, 'Unknown format for ' . $endpointDefinition);
 
-        $this->assertRequestResponseFormat(
-            $format,
-            $method,
-            $uri,
-            $endpointDefinition->getHeaders(),
-            $endpointDefinition->getPayload()
+        $response = $this->performRequest($endpointDefinition);
+
+        self::assertResponseIsSuccessful();
+
+        $this->assertResponseIsValid(
+            (string)$response->getContent(),
+            $endpointDefinition->getResourceType(),
+            $format
         );
     }
 
@@ -74,21 +73,13 @@ abstract class BaseRestWebTestCase extends WebTestCase
         }
     }
 
-    /**
-     * @phpstan-param 'xml'|'json' $format
-     *
-     * @param array<string, string> $headers
-     *
-     * @throws \JsonException
-     */
-    protected function assertRequestResponseFormat(
-        string $format,
-        string $method,
-        string $uri,
-        array $headers,
-        ?InputPayload $payload
-    ): void {
-        $resourceType = $this->getExpectedResourceType();
+    protected function performRequest(EndpointRequestDefinition $endpointDefinition): Response
+    {
+        $method = $endpointDefinition->getMethod();
+        $uri = $endpointDefinition->getUri();
+        $resourceType = $endpointDefinition->getResourceType();
+        $format = $endpointDefinition->getFormat();
+        $headers = $endpointDefinition->getHeaders();
 
         if (null !== $resourceType) {
             $headers['HTTP_ACCEPT'] = $this->generateMediaTypeString("$resourceType+$format");
@@ -96,8 +87,10 @@ abstract class BaseRestWebTestCase extends WebTestCase
             $headers['HTTP_ACCEPT'] = "application/$format";
         }
 
-        if (null !== $payload) {
-            $headers['CONTENT_TYPE'] = $this->generateMediaTypeString($payload->getMediaTypeWithFormat());
+        if (null !== $endpointDefinition->getPayload()) {
+            $headers['CONTENT_TYPE'] = $this->generateMediaTypeString(
+                $endpointDefinition->getPayload()->getMediaTypeWithFormat()
+            );
         }
 
         $this->client->request(
@@ -106,22 +99,14 @@ abstract class BaseRestWebTestCase extends WebTestCase
             [],
             [],
             $headers,
-            null !== $payload ? $payload->getContent() : null
+            null !== $endpointDefinition->getPayload() ? $endpointDefinition->getPayload()->getContent() : null
         );
 
-        self::assertResponseIsSuccessful();
-
-        $this->assertResponseIsValid(
-            (string)$this->client->getResponse()->getContent(),
-            $resourceType,
-            $format
-        );
+        return $this->client->getResponse();
     }
 
     /**
      * @phpstan-param 'xml'|'json' $format
-     *
-     * @throws \JsonException
      */
     protected function assertResponseIsValid(
         string $response,
