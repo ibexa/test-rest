@@ -83,7 +83,7 @@ final class EndpointRequestDefinition implements Stringable
     private function getPayloadDescription(): string
     {
         return null !== $this->payload
-            ? sprintf('with %s %s payload', $this->payload->getMediaType(), $this->payload->getFormat())
+            ? sprintf('with %s payload', $this->payload)
             : 'without payload';
     }
 

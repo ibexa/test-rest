@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Test\Rest\Input\Value;
 
-final class InputPayload
+final class InputPayload implements \Stringable
 {
     private string $mediaType;
 
@@ -16,11 +16,14 @@ final class InputPayload
 
     private string $content;
 
-    public function __construct(string $mediaType, string $format, string $content)
+    private ?string $name;
+
+    public function __construct(string $mediaType, string $format, string $content, ?string $name = null)
     {
         $this->mediaType = $mediaType;
         $this->format = $format;
         $this->content = $content;
+        $this->name = $name;
     }
 
     public function getMediaType(): string
@@ -41,5 +44,10 @@ final class InputPayload
     public function getContent(): string
     {
         return $this->content;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name ?? "$this->mediaType $this->format";
     }
 }
