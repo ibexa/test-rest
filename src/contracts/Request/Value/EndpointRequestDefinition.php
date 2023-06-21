@@ -30,6 +30,14 @@ final class EndpointRequestDefinition implements Stringable
     private ?string $format;
 
     /**
+     * Snapshot name or path relative to Snapshot directory defined by overriding
+     * \Ibexa\Contracts\Test\Rest\BaseRestWebTestCase::getSnapshotDirectory.
+     *
+     * @see \Ibexa\Contracts\Test\Rest\BaseRestWebTestCase::getSnapshotDirectory()
+     */
+    private ?string $snapshotName;
+
+    /**
      * @param array<string, string> $headers input headers
      * @param string|null $name unique name
      *
@@ -42,7 +50,8 @@ final class EndpointRequestDefinition implements Stringable
         array $headers = [],
         ?InputPayload $payload = null,
         ?string $name = null,
-        ?string $format = null
+        ?string $format = null,
+        ?string $snapshotName = null
     ) {
         $this->method = $method;
         $this->uri = $uri;
@@ -51,6 +60,7 @@ final class EndpointRequestDefinition implements Stringable
         $this->payload = $payload;
         $this->name = $name;
         $this->format = $format;
+        $this->snapshotName = $snapshotName;
     }
 
     public function getMethod(): string
@@ -115,6 +125,11 @@ final class EndpointRequestDefinition implements Stringable
         return $this->format;
     }
 
+    public function getSnapshotName(): ?string
+    {
+        return $this->snapshotName;
+    }
+
     /**
      * @phpstan-param 'xml'|'json' $format
      */
@@ -122,6 +137,14 @@ final class EndpointRequestDefinition implements Stringable
     {
         $endpointDefinition = clone $this;
         $endpointDefinition->format = $format;
+
+        return $endpointDefinition;
+    }
+
+    public function withSnapshotName(?string $snapshotName): self
+    {
+        $endpointDefinition = clone $this;
+        $endpointDefinition->snapshotName = $snapshotName;
 
         return $endpointDefinition;
     }

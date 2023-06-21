@@ -19,6 +19,11 @@ abstract class BaseRestWebTestCase extends WebTestCase
 
     abstract protected function getSchemaFileBasePath(string $resourceType, string $format): string;
 
+    protected static function getSnapshotDirectory(): ?string
+    {
+        return null;
+    }
+
     /**
      * @return iterable<\Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition>
      */
@@ -31,8 +36,6 @@ abstract class BaseRestWebTestCase extends WebTestCase
 
     /**
      * @dataProvider getEndpointsData
-     *
-     * @throws \JsonException
      */
     public function testEndpoint(EndpointRequestDefinition $endpointDefinition): void
     {
@@ -44,11 +47,26 @@ abstract class BaseRestWebTestCase extends WebTestCase
 
         self::assertResponseIsSuccessful();
 
+        $content = (string)$response->getContent();
         $this->assertResponseIsValid(
-            (string)$response->getContent(),
+            $content,
             $endpointDefinition->getResourceType(),
             $format
         );
+
+        $snapshotName = $endpointDefinition->getSnapshotName();
+        if (null !== $snapshotName) {
+            $snapshotDirectory = static::getSnapshotDirectory();
+            self::assertNotNull(
+                $snapshotDirectory,
+                sprintf(
+                    'Tried to load %s.%s, but snapshot directory was not defined. Override getSnapshotDirectory method',
+                    $snapshotName,
+                    $format
+                )
+            );
+            self::assertStringMatchesSnapshot($content, $format, "$snapshotDirectory/$snapshotName.$format");
+        }
     }
 
     /**
