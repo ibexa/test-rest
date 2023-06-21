@@ -42,7 +42,8 @@ final class BaseRestWebTestCaseTest extends TestCase
         $testCase = new class() extends BaseRestWebTestCase {
             public static function getEndpointsToTest(): iterable
             {
-                yield new EndpointRequestDefinition('GET', '/foo', null);
+                yield (new EndpointRequestDefinition('GET', '/foo', null))->withFormat('json');
+                yield (new EndpointRequestDefinition('GET', '/foo', null))->withFormat('xml');
             }
 
             protected function getSchemaFileBasePath(string $resourceType, string $format): string

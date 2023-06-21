@@ -75,19 +75,8 @@ abstract class BaseRestWebTestCase extends WebTestCase
     final public static function getEndpointsData(): iterable
     {
         foreach (static::getEndpointsToTest() as $endpoint) {
-            yield from self::buildEndpointsWithRequiredFormats($endpoint);
-        }
-    }
-
-    /**
-     * @return iterable<string, array<\Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition>>
-     */
-    private static function buildEndpointsWithRequiredFormats(EndpointRequestDefinition $endpoint): iterable
-    {
-        foreach (self::REQUIRED_FORMATS as $format) {
-            $endpointWithFormat = $endpoint->withFormat($format);
             // create data set name using EndpointDefinition::__toString
-            yield (string)$endpointWithFormat => [$endpointWithFormat];
+            yield (string)$endpoint => [$endpoint];
         }
     }
 
