@@ -42,8 +42,8 @@ final class BaseRestWebTestCaseTest extends TestCase
         $testCase = new class() extends BaseRestWebTestCase {
             public static function getEndpointsToTest(): iterable
             {
-                yield (new EndpointRequestDefinition('GET', '/foo', null))->withFormat('json');
-                yield (new EndpointRequestDefinition('GET', '/foo', null))->withFormat('xml');
+                yield new EndpointRequestDefinition('GET', '/foo', null, 'application/json');
+                yield new EndpointRequestDefinition('GET', '/foo', null, 'application/xml');
             }
 
             protected function getSchemaFileBasePath(string $resourceType, string $format): string
@@ -60,7 +60,7 @@ final class BaseRestWebTestCaseTest extends TestCase
         }
         self::assertArrayHasKey('GET /foo accepting xml format without payload', $endpointsData);
         self::assertArrayHasKey('GET /foo accepting json format without payload', $endpointsData);
-        self::assertSame('xml', $endpointsData['GET /foo accepting xml format without payload']->getFormat());
-        self::assertSame('json', $endpointsData['GET /foo accepting json format without payload']->getFormat());
+        self::assertSame('xml', $endpointsData['GET /foo accepting xml format without payload']->extractFormatFromAcceptHeader());
+        self::assertSame('json', $endpointsData['GET /foo accepting json format without payload']->extractFormatFromAcceptHeader());
     }
 }

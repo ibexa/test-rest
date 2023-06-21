@@ -10,15 +10,62 @@ namespace Ibexa\Tests\Test\Rest\Request\Value;
 
 use Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 /**
  * @covers \Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition
  */
 final class EndpointRequestDefinitionTest extends TestCase
 {
+    /**
+     * @return iterable<string, array{null|string, 'xml'|'json'}>
+     */
+    public function getDataForTestExtractFormatFromAcceptHeader(): iterable
+    {
+        yield 'application/json' => ['application/json', 'json'];
+        yield 'application/xml' => ['application/xml', 'xml'];
+        yield 'application/vnd.ibexa.api.Foo+xml' => ['application/vnd.ibexa.api.Foo+xml', 'xml'];
+        yield 'application/vnd.ibexa.api.Foo+JSON' => ['application/vnd.ibexa.api.Foo+JSON', 'json'];
+        yield 'application/vnd.ibexa.api.Foo.Bar+XML' => ['application/vnd.ibexa.api.Foo.Bar+XML', 'xml'];
+        yield 'null header' => [null, 'xml'];
+    }
+
+    /**
+     * @dataProvider getDataForTestExtractFormatFromAcceptHeader
+     */
+    public function testExtractFormatFromAcceptHeader(?string $acceptHeader, string $expectedFormat): void
+    {
+        $endpointRequestDefinition = new EndpointRequestDefinition('GET', '/foo', null, $acceptHeader);
+        self::assertSame($expectedFormat, $endpointRequestDefinition->extractFormatFromAcceptHeader());
+    }
+
+    public function testExtractFormatFromAcceptHeaderThrowsExceptionOnInvalidFormat(): void
+    {
+        $endpointRequestDefinition = new EndpointRequestDefinition('GET', '/foo', null, 'application/www-urlencoded');
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage(
+            'Format can be either xml or json. The given accept header: application/www-urlencoded'
+        );
+        $endpointRequestDefinition->extractFormatFromAcceptHeader();
+    }
+
+    public function testWithAcceptHeader(): void
+    {
+        $endpointRequestDefinition = new EndpointRequestDefinition('GET', '/foo', null, 'application/xml');
+
+        $clonedEndpointRequestDefinition = $endpointRequestDefinition->withAcceptHeader(null);
+        self::assertNotSame($endpointRequestDefinition, $clonedEndpointRequestDefinition);
+        self::assertNull($clonedEndpointRequestDefinition->getAcceptHeader());
+
+        $newHeader = 'application/json';
+        $clonedEndpointRequestDefinition = $endpointRequestDefinition->withAcceptHeader($newHeader);
+        self::assertNotSame($endpointRequestDefinition, $clonedEndpointRequestDefinition);
+        self::assertSame($newHeader, $clonedEndpointRequestDefinition->getAcceptHeader());
+    }
+
     public function testWithSnapshotName(): void
     {
-        $endpointRequestDefinition = new EndpointRequestDefinition('GET', '/foo', null);
+        $endpointRequestDefinition = new EndpointRequestDefinition('GET', '/foo', null, 'application/xml');
         self::assertNull($endpointRequestDefinition->getSnapshotName());
 
         $snapshotName = 'bar/baz';

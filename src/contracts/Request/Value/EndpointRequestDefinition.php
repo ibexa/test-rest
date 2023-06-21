@@ -13,11 +13,15 @@ use Stringable;
 
 final class EndpointRequestDefinition implements Stringable
 {
+    public const DEFAULT_FORMAT = 'xml';
+
     private string $method;
 
     private string $uri;
 
-    private ?string $resourceType;
+    private ?string $acceptHeader;
+
+    private ?string $expectedResourceType;
 
     /** @var array<string, string> */
     private array $headers;
@@ -25,9 +29,6 @@ final class EndpointRequestDefinition implements Stringable
     private ?InputPayload $payload;
 
     private ?string $name;
-
-    /** @phpstan-var 'xml'|'json'|null  */
-    private ?string $format;
 
     /**
      * Snapshot name or path relative to Snapshot directory defined by overriding
@@ -40,26 +41,24 @@ final class EndpointRequestDefinition implements Stringable
     /**
      * @param array<string, string> $headers input headers
      * @param string|null $name unique name
-     *
-     * @phpstan-param 'xml'|'json' $format
      */
     public function __construct(
         string $method,
         string $uri,
-        ?string $resourceType,
+        ?string $expectedResourceType,
+        ?string $acceptHeader,
         array $headers = [],
         ?InputPayload $payload = null,
         ?string $name = null,
-        ?string $format = null,
         ?string $snapshotName = null
     ) {
         $this->method = $method;
         $this->uri = $uri;
-        $this->resourceType = $resourceType;
+        $this->expectedResourceType = $expectedResourceType;
+        $this->acceptHeader = $acceptHeader;
         $this->headers = $headers;
         $this->payload = $payload;
         $this->name = $name;
-        $this->format = $format;
         $this->snapshotName = $snapshotName;
     }
 
@@ -73,9 +72,14 @@ final class EndpointRequestDefinition implements Stringable
         return $this->uri;
     }
 
-    public function getResourceType(): ?string
+    public function getExpectedResourceType(): ?string
     {
-        return $this->resourceType;
+        return $this->expectedResourceType;
+    }
+
+    public function getAcceptHeader(): ?string
+    {
+        return $this->acceptHeader;
     }
 
     public function __toString(): string
@@ -99,7 +103,9 @@ final class EndpointRequestDefinition implements Stringable
 
     private function getFormatDescription(): string
     {
-        return null !== $this->format ? "$this->format format" : 'no format';
+        $format = $this->extractFormatFromAcceptHeader();
+
+        return "$format format";
     }
 
     /**
@@ -120,9 +126,22 @@ final class EndpointRequestDefinition implements Stringable
         return $this->name;
     }
 
-    public function getFormat(): ?string
+    /**
+     * @return 'xml'|'json'
+     */
+    public function extractFormatFromAcceptHeader(): string
     {
-        return $this->format;
+        if (null === $this->acceptHeader) {
+            return self::DEFAULT_FORMAT;
+        }
+        if (preg_match('#application/.*\+?(xml|json)#i', $this->acceptHeader, $matches)) {
+            /** @var 'xml'|'json' */
+            return strtolower($matches[1]);
+        }
+
+        throw new \RuntimeException(
+            'Format can be either xml or json. The given accept header: ' . $this->acceptHeader
+        );
     }
 
     public function getSnapshotName(): ?string
@@ -130,13 +149,10 @@ final class EndpointRequestDefinition implements Stringable
         return $this->snapshotName;
     }
 
-    /**
-     * @phpstan-param 'xml'|'json' $format
-     */
-    public function withFormat(string $format): self
+    public function withAcceptHeader(?string $acceptHeader): self
     {
         $endpointDefinition = clone $this;
-        $endpointDefinition->format = $format;
+        $endpointDefinition->acceptHeader = $acceptHeader;
 
         return $endpointDefinition;
     }

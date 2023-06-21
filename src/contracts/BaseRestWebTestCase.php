@@ -39,10 +39,6 @@ abstract class BaseRestWebTestCase extends WebTestCase
      */
     public function testEndpoint(EndpointRequestDefinition $endpointDefinition): void
     {
-        /** @phpstan-var 'xml'|'json' $format */
-        $format = $endpointDefinition->getFormat();
-        self::assertContains($format, self::REQUIRED_FORMATS, 'Unknown format for ' . $endpointDefinition);
-
         $response = $this->performRequest($endpointDefinition);
 
         self::assertResponseIsSuccessful();
@@ -50,22 +46,17 @@ abstract class BaseRestWebTestCase extends WebTestCase
         $content = (string)$response->getContent();
         $this->assertResponseIsValid(
             $content,
-            $endpointDefinition->getResourceType(),
-            $format
+            $endpointDefinition->getExpectedResourceType(),
+            $endpointDefinition->extractFormatFromAcceptHeader()
         );
 
         $snapshotName = $endpointDefinition->getSnapshotName();
         if (null !== $snapshotName) {
-            $snapshotDirectory = static::getSnapshotDirectory();
-            self::assertNotNull(
-                $snapshotDirectory,
-                sprintf(
-                    'Tried to load %s.%s, but snapshot directory was not defined. Override getSnapshotDirectory method',
-                    $snapshotName,
-                    $format
-                )
+            $this->assertResponseMatchesSnapshot(
+                $snapshotName,
+                $endpointDefinition->extractFormatFromAcceptHeader(),
+                $content
             );
-            self::assertStringMatchesSnapshot($content, $format, "$snapshotDirectory/$snapshotName.$format");
         }
     }
 
@@ -84,18 +75,15 @@ abstract class BaseRestWebTestCase extends WebTestCase
     {
         $method = $endpointDefinition->getMethod();
         $uri = $endpointDefinition->getUri();
-        $resourceType = $endpointDefinition->getResourceType();
-        $format = $endpointDefinition->getFormat();
         $headers = $endpointDefinition->getHeaders();
 
-        if (null !== $resourceType) {
-            $headers['HTTP_ACCEPT'] = $this->generateMediaTypeString("$resourceType+$format");
-        } else {
-            $headers['HTTP_ACCEPT'] = "application/$format";
+        $acceptHeader = $endpointDefinition->getAcceptHeader();
+        if (null !== $acceptHeader) {
+            $headers['HTTP_ACCEPT'] = $acceptHeader;
         }
 
         if (null !== $endpointDefinition->getPayload()) {
-            $headers['CONTENT_TYPE'] = $this->generateMediaTypeString(
+            $headers['CONTENT_TYPE'] = self::generateMediaTypeString(
                 $endpointDefinition->getPayload()->getMediaTypeWithFormat()
             );
         }
@@ -126,7 +114,7 @@ abstract class BaseRestWebTestCase extends WebTestCase
             self::assertStringContainsString($resourceType, $response);
             self::assertResponseHeaderSame(
                 'Content-Type',
-                $this->generateMediaTypeString("$resourceType+$format")
+                self::generateMediaTypeString($resourceType, $format)
             );
 
             $this->validateAgainstSchema($response, $resourceType, $format);
@@ -135,8 +123,38 @@ abstract class BaseRestWebTestCase extends WebTestCase
         }
     }
 
-    protected function generateMediaTypeString(string $typeString): string
+    /**
+     * @param 'xml'|'json' $format
+     */
+    private function assertResponseMatchesSnapshot(string $snapshotName, string $format, string $content): void
     {
+        $snapshotDirectory = static::getSnapshotDirectory();
+        self::assertNotNull(
+            $snapshotDirectory,
+            sprintf(
+                'Tried to load %s.%s, but snapshot directory was not defined. Override getSnapshotDirectory method',
+                $snapshotName,
+                $format
+            )
+        );
+        self::assertStringMatchesSnapshot(
+            $content,
+            $format,
+            sprintf(
+                '%s/%s.%s',
+                $snapshotDirectory,
+                $snapshotName,
+                $format
+            )
+        );
+    }
+
+    protected static function generateMediaTypeString(string $typeString, ?string $formatSuffix = null): string
+    {
+        if (null !== $formatSuffix) {
+            $typeString .= "+$formatSuffix";
+        }
+
         return 'application/vnd.ibexa.api.' . $typeString;
     }
 
