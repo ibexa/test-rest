@@ -31,11 +31,6 @@ final class InputPayload implements \Stringable
         return $this->mediaType;
     }
 
-    public function getMediaTypeWithFormat(): string
-    {
-        return "$this->mediaType+$this->format";
-    }
-
     public function getFormat(): string
     {
         return $this->format;

@@ -82,9 +82,11 @@ abstract class BaseRestWebTestCase extends WebTestCase
             $headers['HTTP_ACCEPT'] = $acceptHeader;
         }
 
-        if (null !== $endpointDefinition->getPayload()) {
+        $inputPayload = $endpointDefinition->getPayload();
+        if (null !== $inputPayload) {
             $headers['CONTENT_TYPE'] = self::generateMediaTypeString(
-                $endpointDefinition->getPayload()->getMediaTypeWithFormat()
+                $inputPayload->getMediaType(),
+                $inputPayload->getFormat()
             );
         }
 
@@ -94,7 +96,7 @@ abstract class BaseRestWebTestCase extends WebTestCase
             [],
             [],
             $headers,
-            null !== $endpointDefinition->getPayload() ? $endpointDefinition->getPayload()->getContent() : null
+            null !== $inputPayload ? $inputPayload->getContent() : null
         );
 
         return $this->client->getResponse();
