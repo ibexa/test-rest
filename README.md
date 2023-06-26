@@ -65,11 +65,6 @@ $loader->load(static function (ContainerBuilder $container): void {
 });
 ```
 
-### REST Response Schemas directory
-
-REST Integration Test Framework, for each resource response, validates it against its schema (XSD or JSON). Decide where you want to
-keep schema files and create a directory for them, e.g.: `./tests/integration/Resources/REST/Schemas`.
-
 ## Write your first test
 
 At this point you should be able to write your first test:
@@ -140,10 +135,13 @@ Accept header.
 
 ### Response contents validation against schema files
 
-Your Test case class needs to define `getSchemaFileBasePath` method which returns schema file base path (including
-file name without an extension), e.g.: `./tests/integration/Resources/REST/Schemas/AcmeValue`, where in `Schemas`
-directory, there are two schema files: `AcmeValue.xsd` and `AcmeValue.json`. You can generate these schema files using
-IDE and/or some online tools.
+REST Integration Test Framework, for each resource response, validates it against its schema (XSD or JSON).
+
+Decide where you want to keep schema files and create a directory for them, e.g.:
+`./tests/integration/Resources/REST/Schemas`. To configure it, your Test case class needs to define
+`getSchemaFileBasePath` method which returns schema file base path (including file name without an extension), e.g.:
+`./tests/integration/Resources/REST/Schemas/AcmeValue`, where in `Schemas` directory, there are two schema files:
+`AcmeValue.xsd` and `AcmeValue.json`. You can generate these schema files using IDE and/or some online tools.
 
 Typically, you'd want to create your own abstract base class defining this and make each Test case class extend it
 instead, e.g.:
