@@ -8,7 +8,9 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Test\Rest\Request\Value;
 
+use Closure;
 use Ibexa\Contracts\Test\Rest\Input\Value\InputPayload;
+use RuntimeException;
 use Stringable;
 
 final class EndpointRequestDefinition implements Stringable
@@ -38,6 +40,8 @@ final class EndpointRequestDefinition implements Stringable
      */
     private ?string $snapshotName;
 
+    private ?Closure $afterTestCallback;
+
     /**
      * @param array<string, string> $headers input headers
      * @param string|null $name unique name
@@ -50,7 +54,8 @@ final class EndpointRequestDefinition implements Stringable
         array $headers = [],
         ?InputPayload $payload = null,
         ?string $name = null,
-        ?string $snapshotName = null
+        ?string $snapshotName = null,
+        ?Closure $afterTestCallback = null
     ) {
         $this->method = $method;
         $this->uri = $uri;
@@ -60,6 +65,7 @@ final class EndpointRequestDefinition implements Stringable
         $this->payload = $payload;
         $this->name = $name;
         $this->snapshotName = $snapshotName;
+        $this->afterTestCallback = $afterTestCallback;
     }
 
     public function getMethod(): string
@@ -139,7 +145,7 @@ final class EndpointRequestDefinition implements Stringable
             return strtolower($matches[1]);
         }
 
-        throw new \RuntimeException(
+        throw new RuntimeException(
             'Format can be either xml or json. The given accept header: ' . $this->acceptHeader
         );
     }
@@ -147,6 +153,11 @@ final class EndpointRequestDefinition implements Stringable
     public function getSnapshotName(): ?string
     {
         return $this->snapshotName;
+    }
+
+    public function getAfterTestCallback(): ?Closure
+    {
+        return $this->afterTestCallback;
     }
 
     public function withAcceptHeader(?string $acceptHeader): self
@@ -161,6 +172,14 @@ final class EndpointRequestDefinition implements Stringable
     {
         $endpointDefinition = clone $this;
         $endpointDefinition->snapshotName = $snapshotName;
+
+        return $endpointDefinition;
+    }
+
+    public function withAfterTestCallback(?Closure $afterTestCallback): EndpointRequestDefinition
+    {
+        $endpointDefinition = clone $this;
+        $endpointDefinition->afterTestCallback = $afterTestCallback;
 
         return $endpointDefinition;
     }

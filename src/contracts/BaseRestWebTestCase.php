@@ -58,6 +58,11 @@ abstract class BaseRestWebTestCase extends WebTestCase
                 $content
             );
         }
+
+        $afterTestCallback = $endpointDefinition->getAfterTestCallback();
+        if (null !== $afterTestCallback) {
+            $afterTestCallback($this, $response);
+        }
     }
 
     /**
