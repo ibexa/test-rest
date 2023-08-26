@@ -165,8 +165,22 @@ abstract class BaseRestWebTestCase extends WebTestCase
         string $resourceType,
         string $format
     ): void {
-        $validator = $this->getSchemaValidator($format);
-        $validator->validate($response, $this->getSchemaFileBasePath($resourceType, $format));
+        try {
+            $validator = $this->getSchemaValidator($format);
+            $validator->validate($response, $this->getSchemaFileBasePath($resourceType, $format));
+        } catch (\Throwable $e) {
+            self::fail(
+                sprintf(
+                    'Failed to validate against schema the response of Media Type %s in %s format. ' .
+                    "The response was:\n%s\n" .
+                    "The exception was:\n%s\n",
+                    $resourceType,
+                    $format,
+                    $response,
+                    $e
+                )
+            );
+        }
     }
 
     private function getSchemaValidator(string $format): ValidatorInterface
