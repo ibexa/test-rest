@@ -16,7 +16,7 @@ final class InputPayload implements \Stringable
 
     private string $content;
 
-    private ?string $name;
+    private string $name;
 
     public function __construct(string $mediaType, string $format, string $content, string $name)
     {
