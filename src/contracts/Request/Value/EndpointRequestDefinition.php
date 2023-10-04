@@ -46,7 +46,7 @@ final class EndpointRequestDefinition implements Stringable
         string $method,
         string $uri,
         ?string $expectedResourceType,
-        ?string $acceptHeader,
+        ?string $acceptHeader = null,
         array $headers = [],
         ?InputPayload $payload = null,
         ?string $name = null,
@@ -153,6 +153,14 @@ final class EndpointRequestDefinition implements Stringable
     {
         $endpointDefinition = clone $this;
         $endpointDefinition->acceptHeader = $acceptHeader;
+
+        return $endpointDefinition;
+    }
+
+    public function withPayload(?InputPayload $payload): self
+    {
+        $endpointDefinition = clone $this;
+        $endpointDefinition->payload = $payload;
 
         return $endpointDefinition;
     }

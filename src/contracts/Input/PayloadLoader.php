@@ -29,6 +29,6 @@ final class PayloadLoader implements PayloadLoaderInterface
         $content = file_get_contents($filePath);
         Assert::assertNotFalse($content, "Failed to load file '$filePath' contents");
 
-        return new InputPayload($mediaType, $format, $content);
+        return new InputPayload($mediaType, $format, $content, "$payloadName $format");
     }
 }
