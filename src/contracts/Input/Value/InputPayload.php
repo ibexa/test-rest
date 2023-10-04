@@ -16,9 +16,9 @@ final class InputPayload implements \Stringable
 
     private string $content;
 
-    private string $name;
+    private ?string $name;
 
-    public function __construct(string $mediaType, string $format, string $content, string $name)
+    public function __construct(string $mediaType, string $format, string $content, ?string $name = null)
     {
         $this->mediaType = $mediaType;
         $this->format = $format;
@@ -43,6 +43,6 @@ final class InputPayload implements \Stringable
 
     public function __toString(): string
     {
-        return $this->name;
+        return $this->name ?? "$this->mediaType $this->format";
     }
 }
