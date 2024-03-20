@@ -11,7 +11,7 @@
     "php": "^7.4 || ^8.0",
     "ext-json": "*",
     "ext-dom": "*",
-    "ibexa/test-core": "~4.6.x-dev",
+    "ibexa/test-core": "~5.0.x-dev",
     "justinrainbow/json-schema": "^5.2",
     "symfony/browser-kit": "^5.4",
     "symfony/mime": "^5.4",
@@ -21,7 +21,7 @@
   },
   "require-dev": {
     "ibexa/code-style": "^1.1",
-    "ibexa/core": "~4.6.x-dev",
+    "ibexa/core": "~5.0.x-dev",
     "phpstan/phpstan": "^1.2",
     "phpstan/phpstan-phpunit": "^1.0",
     "phpunit/phpunit": "^9"
@@ -54,7 +54,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-main": "4.6.x-dev"
+      "dev-main": "5.0.x-dev"
     }
   },
   "config": {
