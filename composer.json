@@ -22,7 +22,8 @@
     },
     "require-dev": {
         "ibexa/code-style": "^1.1",
-        "ibexa/core": "~4.4.x-dev",
+        "ibexa/core": "~4.5.x-dev",
+        "ibexa/doctrine-schema": "~4.5.x-dev",
         "phpstan/phpstan": "^1.2",
         "phpstan/phpstan-phpunit": "^1.0",
         "phpunit/phpunit": "^9"
