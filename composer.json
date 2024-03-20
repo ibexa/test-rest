@@ -1,5 +1,6 @@
 {
     "name": "ibexa/test-rest",
+    "description": "Internal Ibexa DXP REST testing framework",
     "license": "proprietary",
     "type": "ibexa-bundle",
     "keywords": [
