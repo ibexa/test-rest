@@ -9,9 +9,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^7.4 || ^8.0",
-        "ext-json": "*",
+        "php": ">=8.3",
         "ext-dom": "*",
+        "ext-json": "*",
         "ibexa/test-core": "~5.0.x-dev",
         "justinrainbow/json-schema": "^5.2",
         "symfony/browser-kit": "^6.4",
