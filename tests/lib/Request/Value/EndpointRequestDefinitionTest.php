@@ -18,7 +18,7 @@ use RuntimeException;
 final class EndpointRequestDefinitionTest extends TestCase
 {
     /**
-     * @return iterable<string, array{null|string, 'xml'|'json'}>
+     * @return iterable<string, array{string|null, 'xml'|'json'}>
      */
     public function getDataForTestExtractFormatFromAcceptHeader(): iterable
     {
