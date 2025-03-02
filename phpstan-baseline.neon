@@ -1,0 +1,13 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertIsString\(\) with string will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/contracts/BaseRestWebTestCase.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Ibexa\\\\Contracts\\\\Test\\\\Rest\\\\Request\\\\Value\\\\EndpointRequestDefinition'' and Ibexa\\Contracts\\Test\\Rest\\Request\\Value\\EndpointRequestDefinition will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/lib/BaseRestWebTestCaseTest.php
