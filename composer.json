@@ -12,7 +12,7 @@
         "php": ">=8.3",
         "ext-dom": "*",
         "ext-json": "*",
-        "ibexa/test-core": "~5.0.x-dev",
+        "ibexa/test-core": "dev-ibx-8471-symfony-7 as 5.0.x-dev",
         "justinrainbow/json-schema": "^5.2",
         "symfony/browser-kit": "^7.2",
         "symfony/mime": "^7.2",
@@ -21,9 +21,9 @@
     },
     "require-dev": {
         "ibexa/code-style": "~2.0.0",
-        "ibexa/core": "~5.0.x-dev",
-        "ibexa/doctrine-schema": "~5.0.x-dev",
-        "ibexa/rector": "~5.0.x-dev",
+        "ibexa/core": "dev-ibx-8471-symfony-7 as 5.0.x-dev",
+        "ibexa/doctrine-schema": "dev-ibx-8471-symfony-7 as 5.0.x-dev",
+        "ibexa/rector": "dev-ibx-8471-symfony-7 as 5.0.x-dev",
         "phpstan/phpstan": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
         "phpunit/phpunit": "^9"
