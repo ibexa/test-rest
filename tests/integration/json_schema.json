@@ -3,8 +3,8 @@
   "properties": {
     "data": {
       "oneOf": [
-        { "$ref": "internal://basic_types#definitions/integerData" },
-        { "$ref": "internal://basic_types#definitions/stringData" }
+        { "$ref": "internal://ibexa/test-rest/basic_types#definitions/integerData" },
+        { "$ref": "internal://ibexa/test-rest/basic_types#definitions/stringData" }
       ]
     }
   },

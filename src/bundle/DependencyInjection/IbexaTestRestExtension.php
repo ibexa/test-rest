@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\Test\Rest\DependencyInjection;
 
+use Ibexa\Contracts\Test\Rest\Schema\SchemaProviderInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -20,6 +21,9 @@ final class IbexaTestRestExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $container->registerForAutoconfiguration(SchemaProviderInterface::class)
+            ->addTag('ibexa.test.rest.schema_provider');
+
         $loader = new YamlFileLoader(
             $container,
             new FileLocator(__DIR__ . '/../Resources/config')
