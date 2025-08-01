@@ -25,7 +25,10 @@ final class JsonSchemaValidatorTest extends IbexaKernelTestCase
         parent::setUp();
         $core = self::getIbexaTestCore();
         $this->validator = $core->getServiceByClassName(JsonSchemaValidator::class);
-        $this->storage = $core->getServiceByClassName(SchemaStorageInterface::class, 'ibexa.test.rest.json_schema.schema_storage');
+        $this->storage = $core->getServiceByClassName(
+            SchemaStorageInterface::class,
+            'ibexa.test.rest.json_schema.schema_storage'
+        );
     }
 
     public function testValidate(): void
@@ -33,13 +36,15 @@ final class JsonSchemaValidatorTest extends IbexaKernelTestCase
         $json = '{"data": {"xyz": false}}';
 
         $this->expectException(ExpectationFailedException::class);
-        $this->expectExceptionMessage(<<<MESSAGE
-        property: [data], constraint: type, error: Object value found, but a string is required
-        property: [data], constraint: type, error: Object value found, but an integer is required
-        property: [data], constraint: oneOf, error: Failed to match exactly one schema
-        
-        Failed asserting that false is true.
-        MESSAGE);
+        $this->expectExceptionMessage(
+            <<<MESSAGE
+            property: [data], constraint: type, error: Object value found, but a string is required
+            property: [data], constraint: type, error: Object value found, but an integer is required
+            property: [data], constraint: oneOf, error: Failed to match exactly one schema
+            
+            Failed asserting that false is true.
+            MESSAGE
+        );
         $this->validator->validate($json, __DIR__ . '/../../json_schema');
     }
 
@@ -52,13 +57,15 @@ final class JsonSchemaValidatorTest extends IbexaKernelTestCase
 
         $json = '{"data": {"xyz": false}}';
         $this->expectException(ExpectationFailedException::class);
-        $this->expectExceptionMessage(<<<MESSAGE
-        property: [data], constraint: type, error: Object value found, but a string is required
-        property: [data], constraint: type, error: Object value found, but an integer is required
-        property: [data], constraint: oneOf, error: Failed to match exactly one schema
-        
-        Failed asserting that false is true.
-        MESSAGE);
+        $this->expectExceptionMessage(
+            <<<MESSAGE
+            property: [data], constraint: type, error: Object value found, but a string is required
+            property: [data], constraint: type, error: Object value found, but an integer is required
+            property: [data], constraint: oneOf, error: Failed to match exactly one schema
+            
+            Failed asserting that false is true.
+            MESSAGE
+        );
         $this->validator->validate($json, 'internal://ibexa/test-rest/json_schema');
     }
 
