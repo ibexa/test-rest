@@ -26,9 +26,15 @@ final class JsonSchemaValidator extends BaseSchemaValidator
     public function validate(string $data, string $schemaFilePath): void
     {
         $decodedData = json_decode($data, false, 512, JSON_THROW_ON_ERROR);
-        $schemaReference = [
-            '$ref' => 'file://' . $this->buildSchemaFilePath($schemaFilePath, 'json'),
-        ];
+        if (str_starts_with($schemaFilePath, 'internal://')) {
+            $schemaReference = [
+                '$ref' => $schemaFilePath,
+            ];
+        } else {
+            $schemaReference = [
+                '$ref' => 'file://' . $this->buildSchemaFilePath($schemaFilePath, 'json'),
+            ];
+        }
 
         $this->validator->validate($decodedData, $schemaReference);
 

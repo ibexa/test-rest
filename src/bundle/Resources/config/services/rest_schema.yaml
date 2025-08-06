@@ -1,8 +1,15 @@
 services:
+    _defaults:
+        public: false
+        autowire: true
+        autoconfigure: true
+
     Ibexa\Test\Rest\Schema\Validator\SchemaValidatorRegistry:
         public: true
         arguments:
             $validators: !tagged_iterator { tag: ibexa.test.rest.schema.validator, index_by: format }
+
+    Ibexa\Test\Rest\Schema\SchemaStorageFactory: ~
 
     Ibexa\Test\Rest\Schema\Validator\BaseSchemaValidator: ~
 
@@ -20,7 +27,6 @@ services:
 
     ibexa.test.rest.json_schema.validator:
         class: JsonSchema\Validator
-        public: true
         arguments:
             $factory: '@ibexa.test.rest.json_schema.factory'
 
@@ -31,9 +37,10 @@ services:
 
     ibexa.test.rest.json_schema.schema_storage:
         class: JsonSchema\SchemaStorage
-        public: true
+        factory: ['@Ibexa\Test\Rest\Schema\SchemaStorageFactory', 'create']
         arguments:
             $uriRetriever: '@ibexa.test.rest.json_schema.uri_retriever'
+            $schemas: !tagged_iterator ibexa.test.rest.schema_provider
 
     ibexa.test.rest.json_schema.uri_retriever:
         class: JsonSchema\Uri\UriRetriever
