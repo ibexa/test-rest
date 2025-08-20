@@ -38,9 +38,12 @@ final class EndpointRequestDefinition implements Stringable
      */
     private ?string $snapshotName;
 
+    private ?int $expectedStatusCode;
+
     /**
      * @param array<string, string> $headers input headers
      * @param string|null $name unique name
+     * @param int|null $expectedStatusCode expected HTTP status code. If none is given, any successful status code is accepted (>=200 <300)
      */
     public function __construct(
         string $method,
@@ -50,7 +53,8 @@ final class EndpointRequestDefinition implements Stringable
         array $headers = [],
         ?InputPayload $payload = null,
         ?string $name = null,
-        ?string $snapshotName = null
+        ?string $snapshotName = null,
+        ?int $expectedStatusCode = null
     ) {
         $this->method = $method;
         $this->uri = $uri;
@@ -60,6 +64,7 @@ final class EndpointRequestDefinition implements Stringable
         $this->payload = $payload;
         $this->name = $name;
         $this->snapshotName = $snapshotName;
+        $this->expectedStatusCode = $expectedStatusCode;
     }
 
     public function getMethod(): string
@@ -149,6 +154,11 @@ final class EndpointRequestDefinition implements Stringable
         return $this->snapshotName;
     }
 
+    public function getExpectedStatusCode(): ?int
+    {
+        return $this->expectedStatusCode;
+    }
+
     public function withAcceptHeader(?string $acceptHeader): self
     {
         $endpointDefinition = clone $this;
@@ -169,6 +179,14 @@ final class EndpointRequestDefinition implements Stringable
     {
         $endpointDefinition = clone $this;
         $endpointDefinition->snapshotName = $snapshotName;
+
+        return $endpointDefinition;
+    }
+
+    public function withExpectedStatusCode(?int $expectedStatusCode): self
+    {
+        $endpointDefinition = clone $this;
+        $endpointDefinition->expectedStatusCode = $expectedStatusCode;
 
         return $endpointDefinition;
     }
