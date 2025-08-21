@@ -41,7 +41,17 @@ abstract class BaseRestWebTestCase extends WebTestCase
     {
         $response = $this->performRequest($endpointDefinition);
 
-        self::assertResponseIsSuccessful();
+        $expectedStatusCode = $endpointDefinition->getExpectedStatusCode();
+        if (null === $expectedStatusCode) {
+            self::assertResponseIsSuccessful();
+        } else {
+            $actualStatusCode = $response->getStatusCode();
+            self::assertSame(
+                $actualStatusCode,
+                $expectedStatusCode,
+                "Expected HTTP $expectedStatusCode, got HTTP $actualStatusCode status code"
+            );
+        }
 
         $content = (string)$response->getContent();
         $this->assertResponseIsValid(
