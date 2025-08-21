@@ -11,6 +11,7 @@ namespace Ibexa\Tests\Test\Rest\Request\Value;
 use Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @covers \Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition
@@ -73,5 +74,23 @@ final class EndpointRequestDefinitionTest extends TestCase
         self::assertNotSame($endpointRequestDefinition, $clonedEndpointRequestDefinition);
         self::assertNull($endpointRequestDefinition->getSnapshotName());
         self::assertSame($snapshotName, $clonedEndpointRequestDefinition->getSnapshotName());
+    }
+
+    public function testWithExpectedStatusCode(): void
+    {
+        $endpointRequestDefinition = new EndpointRequestDefinition('GET', '/foo', null, 'application/xml');
+        self::assertNull($endpointRequestDefinition->getExpectedStatusCode());
+
+        $endpointRequestDefinition = $endpointRequestDefinition->withExpectedStatusCode(Response::HTTP_CREATED);
+        self::assertSame(Response::HTTP_CREATED, $endpointRequestDefinition->getExpectedStatusCode());
+
+        $endpointRequestDefinition = new EndpointRequestDefinition(
+            method:               'GET',
+            uri:                  '/foo',
+            expectedResourceType: null,
+            acceptHeader:         'application/xml',
+            expectedStatusCode:   Response::HTTP_NO_CONTENT
+        );
+        self::assertSame(Response::HTTP_NO_CONTENT, $endpointRequestDefinition->getExpectedStatusCode());
     }
 }

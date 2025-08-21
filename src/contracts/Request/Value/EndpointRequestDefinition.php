@@ -13,53 +13,25 @@ use Stringable;
 
 final class EndpointRequestDefinition implements Stringable
 {
-    public const DEFAULT_FORMAT = 'xml';
-
-    private string $method;
-
-    private string $uri;
-
-    private ?string $acceptHeader;
-
-    private ?string $expectedResourceType;
-
-    /** @var array<string, string> */
-    private array $headers;
-
-    private ?InputPayload $payload;
-
-    private ?string $name;
-
-    /**
-     * Snapshot name or path relative to Snapshot directory defined by overriding
-     * \Ibexa\Contracts\Test\Rest\BaseRestWebTestCase::getSnapshotDirectory.
-     *
-     * @see \Ibexa\Contracts\Test\Rest\BaseRestWebTestCase::getSnapshotDirectory()
-     */
-    private ?string $snapshotName;
+    public const string DEFAULT_FORMAT = 'xml';
 
     /**
      * @param array<string, string> $headers input headers
-     * @param string|null $name unique name
+     * @param string|null $name unique name, used to generate PHPUnit data set name
+     * @param string|null $snapshotName Snapshot name or path relative to Snapshot directory defined by overriding {@see \Ibexa\Contracts\Test\Rest\BaseRestWebTestCase::getSnapshotDirectory()}
+     * @param int|null $expectedStatusCode expected HTTP status code. If none is given, any successful status code is accepted (>=200 <300)
      */
     public function __construct(
-        string $method,
-        string $uri,
-        ?string $expectedResourceType,
-        ?string $acceptHeader = null,
-        array $headers = [],
-        ?InputPayload $payload = null,
-        ?string $name = null,
-        ?string $snapshotName = null
+        private readonly string $method,
+        private readonly string $uri,
+        private readonly ?string $expectedResourceType,
+        private ?string $acceptHeader = null,
+        private readonly array $headers = [],
+        private ?InputPayload $payload = null,
+        private readonly ?string $name = null,
+        private ?string $snapshotName = null,
+        private ?int $expectedStatusCode = null
     ) {
-        $this->method = $method;
-        $this->uri = $uri;
-        $this->expectedResourceType = $expectedResourceType;
-        $this->acceptHeader = $acceptHeader;
-        $this->headers = $headers;
-        $this->payload = $payload;
-        $this->name = $name;
-        $this->snapshotName = $snapshotName;
     }
 
     public function getMethod(): string
@@ -149,6 +121,11 @@ final class EndpointRequestDefinition implements Stringable
         return $this->snapshotName;
     }
 
+    public function getExpectedStatusCode(): ?int
+    {
+        return $this->expectedStatusCode;
+    }
+
     public function withAcceptHeader(?string $acceptHeader): self
     {
         $endpointDefinition = clone $this;
@@ -169,6 +146,14 @@ final class EndpointRequestDefinition implements Stringable
     {
         $endpointDefinition = clone $this;
         $endpointDefinition->snapshotName = $snapshotName;
+
+        return $endpointDefinition;
+    }
+
+    public function withExpectedStatusCode(?int $expectedStatusCode): self
+    {
+        $endpointDefinition = clone $this;
+        $endpointDefinition->expectedStatusCode = $expectedStatusCode;
 
         return $endpointDefinition;
     }

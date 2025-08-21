@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class BaseRestWebTestCase extends WebTestCase
 {
-    public const REQUIRED_FORMATS = ['xml', 'json'];
+    public const array REQUIRED_FORMATS = ['xml', 'json'];
 
     abstract protected function getSchemaFileBasePath(string $resourceType, string $format): string;
 
@@ -41,7 +41,17 @@ abstract class BaseRestWebTestCase extends WebTestCase
     {
         $response = $this->performRequest($endpointDefinition);
 
-        self::assertResponseIsSuccessful();
+        $expectedStatusCode = $endpointDefinition->getExpectedStatusCode();
+        if (null === $expectedStatusCode) {
+            self::assertResponseIsSuccessful();
+        } else {
+            $actualStatusCode = $response->getStatusCode();
+            self::assertSame(
+                $actualStatusCode,
+                $expectedStatusCode,
+                "Expected HTTP $expectedStatusCode, got HTTP $actualStatusCode status code"
+            );
+        }
 
         $content = (string)$response->getContent();
         $this->assertResponseIsValid(
@@ -110,8 +120,6 @@ abstract class BaseRestWebTestCase extends WebTestCase
         ?string $resourceType,
         string $format
     ): void {
-        self::assertIsString($response);
-
         if (null !== $resourceType) {
             self::assertStringContainsString($resourceType, $response);
             self::assertResponseHeaderSame(
