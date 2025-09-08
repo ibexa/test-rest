@@ -45,19 +45,13 @@ abstract class BaseRestWebTestCase extends WebTestCase
         if (null === $expectedStatusCode) {
             self::assertResponseIsSuccessful();
         } else {
-            $actualStatusCode = $response->getStatusCode();
-            self::assertSame(
-                $actualStatusCode,
-                $expectedStatusCode,
-                "Expected HTTP $expectedStatusCode, got HTTP $actualStatusCode status code"
-            );
+            self::assertResponseStatusCodeSame($expectedStatusCode);
         }
 
         $content = (string)$response->getContent();
         $this->assertResponseIsValid(
             $content,
-            $endpointDefinition->getExpectedResourceType(),
-            $endpointDefinition->extractFormatFromAcceptHeader()
+            $endpointDefinition,
         );
 
         $snapshotName = $endpointDefinition->getSnapshotName();
@@ -112,15 +106,12 @@ abstract class BaseRestWebTestCase extends WebTestCase
         return $this->client->getResponse();
     }
 
-    /**
-     * @phpstan-param 'xml'|'json' $format
-     */
     protected function assertResponseIsValid(
         string $response,
-        ?string $resourceType,
-        string $format
+        EndpointRequestDefinition $endpointDefinition
     ): void {
-        self::assertIsString($response);
+        $resourceType = $endpointDefinition->getExpectedResourceType();
+        $format = $endpointDefinition->extractFormatFromAcceptHeader();
 
         if (null !== $resourceType) {
             self::assertStringContainsString($resourceType, $response);
@@ -129,7 +120,8 @@ abstract class BaseRestWebTestCase extends WebTestCase
                 self::generateMediaTypeString($resourceType, $format)
             );
 
-            $this->validateAgainstSchema($response, $resourceType, $format);
+            $schemaLocation = $endpointDefinition->getSchemaLocation() ?? $this->getSchemaFileBasePath($resourceType, $format);
+            $this->validateAgainstSchema($response, $resourceType, $format, $schemaLocation);
         } else {
             self::assertEmpty($response, "The response for '$format' format is not empty");
         }
@@ -173,11 +165,12 @@ abstract class BaseRestWebTestCase extends WebTestCase
     private function validateAgainstSchema(
         string $response,
         string $resourceType,
-        string $format
+        string $format,
+        string $schemaLocation
     ): void {
         try {
             $validator = $this->getSchemaValidator($format);
-            $validator->validate($response, $this->getSchemaFileBasePath($resourceType, $format));
+            $validator->validate($response, $schemaLocation);
         } catch (\Throwable $e) {
             self::fail(
                 sprintf(
