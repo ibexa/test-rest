@@ -1,7 +1,7 @@
 {
     "name": "ibexa/test-rest",
     "description": "Internal Ibexa DXP REST testing framework",
-    "license": "proprietary",
+    "license": "(GPL-2.0-only or proprietary)",
     "type": "ibexa-bundle",
     "keywords": [
         "ibexa-dxp"
