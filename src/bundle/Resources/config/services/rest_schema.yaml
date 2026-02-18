@@ -42,5 +42,9 @@ services:
             $uriRetriever: '@ibexa.test.rest.json_schema.uri_retriever'
             $schemas: !tagged_iterator ibexa.test.rest.schema_provider
 
+    Ibexa\Test\Rest\Schema\ErrorSchemaProvider:
+        tags:
+            - { name: ibexa.test.rest.schema_provider }
+
     ibexa.test.rest.json_schema.uri_retriever:
         class: JsonSchema\Uri\UriRetriever
