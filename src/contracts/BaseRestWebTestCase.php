@@ -11,6 +11,7 @@ namespace Ibexa\Contracts\Test\Rest;
 use Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition;
 use Ibexa\Contracts\Test\Rest\Schema\ValidatorInterface;
 use Ibexa\Test\Rest\Schema\Validator\SchemaValidatorRegistry;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\HttpFoundation\Response;
 
 abstract class BaseRestWebTestCase extends WebTestCase
@@ -34,9 +35,7 @@ abstract class BaseRestWebTestCase extends WebTestCase
         self::fail(sprintf('%s needs to implement %s method', static::class, __METHOD__));
     }
 
-    /**
-     * @dataProvider getEndpointsData
-     */
+    #[DataProvider('getEndpointsData')]
     public function testEndpoint(EndpointRequestDefinition $endpointDefinition): void
     {
         $response = $this->performRequest($endpointDefinition);
