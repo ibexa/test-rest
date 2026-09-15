@@ -9,19 +9,19 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Test\Rest\Request\Value;
 
 use Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @covers \Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition
- */
+#[CoversClass(EndpointRequestDefinition::class)]
 final class EndpointRequestDefinitionTest extends TestCase
 {
     /**
      * @return iterable<string, array{string|null, 'xml'|'json'}>
      */
-    public function getDataForTestExtractFormatFromAcceptHeader(): iterable
+    public static function getDataForTestExtractFormatFromAcceptHeader(): iterable
     {
         yield 'application/json' => ['application/json', 'json'];
         yield 'application/xml' => ['application/xml', 'xml'];
@@ -31,9 +31,7 @@ final class EndpointRequestDefinitionTest extends TestCase
         yield 'null header' => [null, 'xml'];
     }
 
-    /**
-     * @dataProvider getDataForTestExtractFormatFromAcceptHeader
-     */
+    #[DataProvider('getDataForTestExtractFormatFromAcceptHeader')]
     public function testExtractFormatFromAcceptHeader(?string $acceptHeader, string $expectedFormat): void
     {
         $endpointRequestDefinition = new EndpointRequestDefinition('GET', '/foo', null, $acceptHeader);
