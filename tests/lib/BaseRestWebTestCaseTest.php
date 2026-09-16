@@ -11,16 +11,15 @@ namespace Ibexa\Tests\Test\Rest;
 use Ibexa\Contracts\Test\Rest\BaseRestWebTestCase;
 use Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Ibexa\Contracts\Test\Rest\BaseRestWebTestCase
- */
+#[CoversClass(BaseRestWebTestCase::class)]
 final class BaseRestWebTestCaseTest extends TestCase
 {
     public function testGetEndpointsDataRequiresEndpointsToTest(): void
     {
-        $testCase = new class() extends BaseRestWebTestCase {
+        $testCase = new class('test') extends BaseRestWebTestCase {
             protected function getSchemaFileBasePath(string $resourceType, string $format): string
             {
                 return $resourceType;
@@ -39,7 +38,7 @@ final class BaseRestWebTestCaseTest extends TestCase
 
     public function testGetEndpointsDataBuildsProperDataProvider(): void
     {
-        $testCase = new class() extends BaseRestWebTestCase {
+        $testCase = new class('test') extends BaseRestWebTestCase {
             public static function getEndpointsToTest(): iterable
             {
                 yield new EndpointRequestDefinition('GET', '/foo', null, 'application/json');

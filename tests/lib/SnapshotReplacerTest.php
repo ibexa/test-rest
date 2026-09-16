@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Test\Rest;
 
 use Ibexa\Contracts\Test\Rest\SnapshotReplacer;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class SnapshotReplacerTest extends TestCase
@@ -20,10 +21,8 @@ final class SnapshotReplacerTest extends TestCase
         $this->replacer = new SnapshotReplacer();
     }
 
-    /**
-     * @dataProvider provideForXmlDateReplacements
-     * @dataProvider provideForJsonDateReplacements
-     */
+    #[DataProvider('provideForXmlDateReplacements')]
+    #[DataProvider('provideForJsonDateReplacements')]
     public function testReplacements(
         string $input,
         string $expectedOutput
@@ -55,7 +54,7 @@ final class SnapshotReplacerTest extends TestCase
     /**
      * @return iterable<array{non-empty-string, non-empty-string}>
      */
-    public function provideForXmlDateReplacements(): iterable
+    public static function provideForXmlDateReplacements(): iterable
     {
         yield 'ProductCreateWebTest.xml' => self::prepareSnapshots('ProductCreateWebTest', 'xml');
         yield 'ProductGetWebTest.xml' => self::prepareSnapshots('ProductGetWebTest', 'xml');
