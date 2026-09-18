@@ -2,8 +2,11 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd"
         failOnWarning="true"
+        failOnNotice="true"
         cacheDirectory=".phpunit.cache"
-        colors="true">
+        colors="true"
+        displayDetailsOnTestsThatTriggerDeprecations="true"
+        failOnDeprecation="true">
     <php>
         <env name="TEST_REST_GENERATE_SNAPSHOTS" value="false" />
         <env name="KERNEL_CLASS" value="Ibexa\Tests\Integration\Test\Rest\TestKernel" />
@@ -19,4 +22,11 @@
             <directory>tests/lib</directory>
         </testsuite>
     </testsuites>
+    <source baseline="phpunit.baseline.xml" ignoreIndirectDeprecations="false" ignoreSuppressionOfDeprecations="true">
+        <include>
+            <directory>src/bundle</directory>
+            <directory>src/contracts</directory>
+            <directory>src/lib</directory>
+        </include>
+    </source>
 </phpunit>
