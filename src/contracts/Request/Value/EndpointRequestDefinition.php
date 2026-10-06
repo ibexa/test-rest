@@ -30,6 +30,8 @@ final class EndpointRequestDefinition implements Stringable
 
     private ?string $name;
 
+    private ?string $schemaLocation = null;
+
     /**
      * Snapshot name or path relative to Snapshot directory defined by overriding
      * \Ibexa\Contracts\Test\Rest\BaseRestWebTestCase::getSnapshotDirectory.
@@ -54,7 +56,8 @@ final class EndpointRequestDefinition implements Stringable
         ?InputPayload $payload = null,
         ?string $name = null,
         ?string $snapshotName = null,
-        ?int $expectedStatusCode = null
+        ?int $expectedStatusCode = null,
+        ?string $schemaLocation = null
     ) {
         $this->method = $method;
         $this->uri = $uri;
@@ -65,6 +68,7 @@ final class EndpointRequestDefinition implements Stringable
         $this->name = $name;
         $this->snapshotName = $snapshotName;
         $this->expectedStatusCode = $expectedStatusCode;
+        $this->schemaLocation = $schemaLocation;
     }
 
     public function getMethod(): string
@@ -131,6 +135,11 @@ final class EndpointRequestDefinition implements Stringable
         return $this->name;
     }
 
+    public function getSchemaLocation(): ?string
+    {
+        return $this->schemaLocation;
+    }
+
     /**
      * @return 'xml'|'json'
      */
@@ -179,6 +188,14 @@ final class EndpointRequestDefinition implements Stringable
     {
         $endpointDefinition = clone $this;
         $endpointDefinition->snapshotName = $snapshotName;
+
+        return $endpointDefinition;
+    }
+
+    public function withSchemaLocation(?string $schemaLocation): self
+    {
+        $endpointDefinition = clone $this;
+        $endpointDefinition->schemaLocation = $schemaLocation;
 
         return $endpointDefinition;
     }
