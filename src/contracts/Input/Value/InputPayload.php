@@ -18,8 +18,12 @@ final class InputPayload implements \Stringable
 
     private ?string $name;
 
-    public function __construct(string $mediaType, string $format, string $content, ?string $name = null)
-    {
+    public function __construct(
+        string $mediaType,
+        string $format,
+        string $content,
+        ?string $name = null
+    ) {
         $this->mediaType = $mediaType;
         $this->format = $format;
         $this->content = $content;

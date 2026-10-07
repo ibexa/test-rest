@@ -84,8 +84,10 @@ final class SnapshotReplacer
      * @phpstan-param non-empty-string $pattern
      * @phpstan-param non-empty-string $replacement
      */
-    public function withReplacement(string $pattern, string $replacement): void
-    {
+    public function withReplacement(
+        string $pattern,
+        string $replacement
+    ): void {
         $this->replacementMap[$pattern] = $replacement;
     }
 

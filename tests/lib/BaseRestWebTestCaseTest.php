@@ -21,8 +21,10 @@ final class BaseRestWebTestCaseTest extends TestCase
     public function testGetEndpointsDataRequiresEndpointsToTest(): void
     {
         $testCase = new class() extends BaseRestWebTestCase {
-            protected function getSchemaFileBasePath(string $resourceType, string $format): string
-            {
+            protected function getSchemaFileBasePath(
+                string $resourceType,
+                string $format
+            ): string {
                 return $resourceType;
             }
         };
@@ -46,8 +48,10 @@ final class BaseRestWebTestCaseTest extends TestCase
                 yield new EndpointRequestDefinition('GET', '/foo', null, 'application/xml');
             }
 
-            protected function getSchemaFileBasePath(string $resourceType, string $format): string
-            {
+            protected function getSchemaFileBasePath(
+                string $resourceType,
+                string $format
+            ): string {
                 return $resourceType;
             }
         };

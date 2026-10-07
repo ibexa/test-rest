@@ -10,6 +10,4 @@ namespace Ibexa\Bundle\Test\Rest;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-final class IbexaTestRestBundle extends Bundle
-{
-}
+final class IbexaTestRestBundle extends Bundle {}

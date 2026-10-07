@@ -20,8 +20,11 @@ final class PayloadLoader implements PayloadLoaderInterface
         $this->payloadDirectory = $payloadDirectory;
     }
 
-    public function loadPayload(string $mediaType, string $format, ?string $payloadName = null): InputPayload
-    {
+    public function loadPayload(
+        string $mediaType,
+        string $format,
+        ?string $payloadName = null
+    ): InputPayload {
         $payloadName = $payloadName ?? $mediaType;
         $filePath = $this->payloadDirectory . "/$payloadName.$format";
         Assert::assertFileIsReadable($filePath);

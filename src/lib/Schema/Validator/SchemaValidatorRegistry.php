@@ -12,11 +12,11 @@ use Ibexa\Contracts\Test\Rest\Schema\ValidatorInterface;
 
 final class SchemaValidatorRegistry
 {
-    /** @var array<string, \Ibexa\Contracts\Test\Rest\Schema\ValidatorInterface> */
+    /** @var array<string, ValidatorInterface> */
     private array $validators;
 
     /**
-     * @param iterable<string, \Ibexa\Contracts\Test\Rest\Schema\ValidatorInterface> $validators
+     * @param iterable<string, ValidatorInterface> $validators
      */
     public function __construct(iterable $validators)
     {
