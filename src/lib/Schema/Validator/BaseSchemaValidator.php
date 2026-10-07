@@ -13,8 +13,10 @@ use PHPUnit\Framework\Assert;
 
 abstract class BaseSchemaValidator implements ValidatorInterface
 {
-    protected function buildSchemaFilePath(string $schemaBasePath, string $format): string
-    {
+    protected function buildSchemaFilePath(
+        string $schemaBasePath,
+        string $format
+    ): string {
         $schemaFilePath = "$schemaBasePath.$format";
         if (!file_exists($schemaFilePath)) {
             Assert::fail("Schema file '$schemaFilePath' does not exist");

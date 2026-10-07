@@ -67,8 +67,10 @@ final class SnapshotReplacerTest extends TestCase
      *
      * @return array{non-empty-string, non-empty-string}
      */
-    private static function prepareSnapshots(string $filename, string $type): array
-    {
+    private static function prepareSnapshots(
+        string $filename,
+        string $type
+    ): array {
         return [
             self::loadSnapshot(sprintf(__DIR__ . '/_snapshot/%s.input.%s', $filename, $type)),
             self::loadSnapshot(sprintf(__DIR__ . '/_snapshot/%s.output.%s', $filename, $type)),
