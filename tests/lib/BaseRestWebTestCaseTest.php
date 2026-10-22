@@ -20,8 +20,10 @@ final class BaseRestWebTestCaseTest extends TestCase
     public function testGetEndpointsDataRequiresEndpointsToTest(): void
     {
         $testCase = new class('test') extends BaseRestWebTestCase {
-            protected function getSchemaFileBasePath(string $resourceType, string $format): string
-            {
+            protected function getSchemaFileBasePath(
+                string $resourceType,
+                string $format
+            ): string {
                 return $resourceType;
             }
         };
