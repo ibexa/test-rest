@@ -45,8 +45,10 @@ final class BaseRestWebTestCaseTest extends TestCase
                 yield new EndpointRequestDefinition('GET', '/foo', null, 'application/xml');
             }
 
-            protected function getSchemaFileBasePath(string $resourceType, string $format): string
-            {
+            protected function getSchemaFileBasePath(
+                string $resourceType,
+                string $format
+            ): string {
                 return $resourceType;
             }
         };

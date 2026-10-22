@@ -18,7 +18,10 @@ abstract class BaseRestWebTestCase extends WebTestCase
 {
     public const array REQUIRED_FORMATS = ['xml', 'json'];
 
-    abstract protected function getSchemaFileBasePath(string $resourceType, string $format): string;
+    abstract protected function getSchemaFileBasePath(
+        string $resourceType,
+        string $format
+    ): string;
 
     protected static function getSnapshotDirectory(): ?string
     {
@@ -26,7 +29,7 @@ abstract class BaseRestWebTestCase extends WebTestCase
     }
 
     /**
-     * @return iterable<\Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition>
+     * @return iterable<EndpointRequestDefinition>
      */
     protected static function getEndpointsToTest(): iterable
     {
@@ -70,7 +73,7 @@ abstract class BaseRestWebTestCase extends WebTestCase
     }
 
     /**
-     * @return iterable<string, array<\Ibexa\Contracts\Test\Rest\Request\Value\EndpointRequestDefinition>>
+     * @return iterable<string, array<EndpointRequestDefinition>>
      */
     final public static function getEndpointsData(): iterable
     {
@@ -135,8 +138,11 @@ abstract class BaseRestWebTestCase extends WebTestCase
     /**
      * @param 'xml'|'json' $format
      */
-    private function assertResponseMatchesSnapshot(string $snapshotName, string $format, string $content): void
-    {
+    private function assertResponseMatchesSnapshot(
+        string $snapshotName,
+        string $format,
+        string $content
+    ): void {
         $snapshotDirectory = static::getSnapshotDirectory();
         self::assertNotNull(
             $snapshotDirectory,
@@ -158,8 +164,10 @@ abstract class BaseRestWebTestCase extends WebTestCase
         );
     }
 
-    protected static function generateMediaTypeString(string $typeString, ?string $formatSuffix = null): string
-    {
+    protected static function generateMediaTypeString(
+        string $typeString,
+        ?string $formatSuffix = null
+    ): string {
         if (null !== $formatSuffix) {
             $typeString .= "+$formatSuffix";
         }
@@ -192,7 +200,7 @@ abstract class BaseRestWebTestCase extends WebTestCase
 
     private function getSchemaValidator(string $format): ValidatorInterface
     {
-        /** @var \Ibexa\Test\Rest\Schema\Validator\SchemaValidatorRegistry $registry */
+        /** @var SchemaValidatorRegistry $registry */
         $registry = self::getContainer()->get(SchemaValidatorRegistry::class);
 
         return $registry->getValidator($format);
