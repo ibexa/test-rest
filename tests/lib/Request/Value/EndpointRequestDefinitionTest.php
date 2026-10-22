@@ -87,11 +87,11 @@ final class EndpointRequestDefinitionTest extends TestCase
         self::assertSame(Response::HTTP_CREATED, $endpointRequestDefinition->getExpectedStatusCode());
 
         $endpointRequestDefinition = new EndpointRequestDefinition(
-            method:               'GET',
-            uri:                  '/foo',
+            method: 'GET',
+            uri: '/foo',
             expectedResourceType: null,
-            acceptHeader:         'application/xml',
-            expectedStatusCode:   Response::HTTP_NO_CONTENT
+            acceptHeader: 'application/xml',
+            expectedStatusCode: Response::HTTP_NO_CONTENT
         );
         self::assertSame(Response::HTTP_NO_CONTENT, $endpointRequestDefinition->getExpectedStatusCode());
     }

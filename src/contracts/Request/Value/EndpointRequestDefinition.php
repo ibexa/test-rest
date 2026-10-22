@@ -19,7 +19,7 @@ final class EndpointRequestDefinition implements Stringable
     /**
      * @param array<string, string> $headers input headers
      * @param string|null $name unique name, used to generate PHPUnit data set name
-     * @param string|null $snapshotName Snapshot name or path relative to Snapshot directory defined by overriding {@see \Ibexa\Contracts\Test\Rest\BaseRestWebTestCase::getSnapshotDirectory()}
+     * @param string|null $snapshotName Snapshot name or path relative to Snapshot directory defined by overriding {@see BaseRestWebTestCase::getSnapshotDirectory()}
      * @param int|null $expectedStatusCode expected HTTP status code. If none is given, any successful status code is accepted (>=200 <300)
      */
     public function __construct(
@@ -32,8 +32,7 @@ final class EndpointRequestDefinition implements Stringable
         private readonly ?string $name = null,
         private ?string $snapshotName = null,
         private ?int $expectedStatusCode = null
-    ) {
-    }
+    ) {}
 
     public function getMethod(): string
     {
