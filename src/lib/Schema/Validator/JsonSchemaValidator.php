@@ -23,8 +23,10 @@ final class JsonSchemaValidator extends BaseSchemaValidator
     /**
      * @throws \JsonException
      */
-    public function validate(string $data, string $schemaFilePath): void
-    {
+    public function validate(
+        string $data,
+        string $schemaFilePath
+    ): void {
         $decodedData = json_decode($data, false, 512, JSON_THROW_ON_ERROR);
         if (str_starts_with($schemaFilePath, 'internal://')) {
             $schemaReference = [

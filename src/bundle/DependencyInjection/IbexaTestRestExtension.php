@@ -19,8 +19,10 @@ final class IbexaTestRestExtension extends Extension
     /**
      * @param array<string, mixed> $configs
      */
-    public function load(array $configs, ContainerBuilder $container): void
-    {
+    public function load(
+        array $configs,
+        ContainerBuilder $container
+    ): void {
         $container->registerForAutoconfiguration(SchemaProviderInterface::class)
             ->addTag('ibexa.test.rest.schema_provider');
 

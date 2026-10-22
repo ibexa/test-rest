@@ -51,7 +51,7 @@ abstract class WebTestCase extends SymfonyWebTestCase
 
         if (!isset($this->ibexaCore)) {
             if (!self::$kernel instanceof IbexaTestKernelInterface) {
-                throw new \LogicException(sprintf(
+                throw new LogicException(sprintf(
                     '%s requires %s as an argument, but received %s. Ensure that KERNEL_CLASS env variable is set properly.',
                     IbexaTestCore::class,
                     IbexaTestKernelInterface::class,
@@ -96,13 +96,17 @@ abstract class WebTestCase extends SymfonyWebTestCase
         return $replacer;
     }
 
-    protected static function assertResponseMatchesXmlSnapshot(string $content, ?string $file = null): void
-    {
+    protected static function assertResponseMatchesXmlSnapshot(
+        string $content,
+        ?string $file = null
+    ): void {
         self::assertStringMatchesSnapshot($content, 'xml', $file);
     }
 
-    protected static function assertResponseMatchesJsonSnapshot(string $content, ?string $file = null): void
-    {
+    protected static function assertResponseMatchesJsonSnapshot(
+        string $content,
+        ?string $file = null
+    ): void {
         self::assertStringMatchesSnapshot($content, 'json', $file);
     }
 

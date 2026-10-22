@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Test\Rest\Request\Value;
 
+use Ibexa\Contracts\Test\Rest\BaseRestWebTestCase;
 use Ibexa\Contracts\Test\Rest\Input\Value\InputPayload;
 use Stringable;
 
@@ -34,7 +35,7 @@ final class EndpointRequestDefinition implements Stringable
      * Snapshot name or path relative to Snapshot directory defined by overriding
      * \Ibexa\Contracts\Test\Rest\BaseRestWebTestCase::getSnapshotDirectory.
      *
-     * @see \Ibexa\Contracts\Test\Rest\BaseRestWebTestCase::getSnapshotDirectory()
+     * @see BaseRestWebTestCase::getSnapshotDirectory()
      */
     private ?string $snapshotName;
 

@@ -8,13 +8,14 @@ declare(strict_types=1);
 
 namespace Ibexa\Test\Rest\Schema;
 
+use Ibexa\Contracts\Test\Rest\Schema\SchemaProviderInterface;
 use JsonSchema\SchemaStorage;
 use JsonSchema\UriRetrieverInterface;
 
 final class SchemaStorageFactory
 {
     /**
-     * @param iterable<\Ibexa\Contracts\Test\Rest\Schema\SchemaProviderInterface> $schemas
+     * @param iterable<SchemaProviderInterface> $schemas
      */
     public function create(
         UriRetrieverInterface $uriRetriever,
