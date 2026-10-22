@@ -34,8 +34,10 @@ final class EndpointRequestDefinitionTest extends TestCase
     /**
      * @dataProvider getDataForTestExtractFormatFromAcceptHeader
      */
-    public function testExtractFormatFromAcceptHeader(?string $acceptHeader, string $expectedFormat): void
-    {
+    public function testExtractFormatFromAcceptHeader(
+        ?string $acceptHeader,
+        string $expectedFormat
+    ): void {
         $endpointRequestDefinition = new EndpointRequestDefinition('GET', '/foo', null, $acceptHeader);
         self::assertSame($expectedFormat, $endpointRequestDefinition->extractFormatFromAcceptHeader());
     }

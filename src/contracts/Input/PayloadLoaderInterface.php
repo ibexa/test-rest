@@ -12,5 +12,9 @@ use Ibexa\Contracts\Test\Rest\Input\Value\InputPayload;
 
 interface PayloadLoaderInterface
 {
-    public function loadPayload(string $mediaType, string $format, ?string $payloadName = null): InputPayload;
+    public function loadPayload(
+        string $mediaType,
+        string $format,
+        ?string $payloadName = null
+    ): InputPayload;
 }

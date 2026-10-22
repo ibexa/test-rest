@@ -15,8 +15,11 @@ final class TestCaseSample extends BaseWebTestCase
     /**
      * @param "json"|"xml"|null $type
      */
-    public function testComparison(string $snapshotContent, ?string $type, ?string $file): void
-    {
+    public function testComparison(
+        string $snapshotContent,
+        ?string $type,
+        ?string $file
+    ): void {
         self::assertStringMatchesSnapshot(
             $snapshotContent,
             $type,

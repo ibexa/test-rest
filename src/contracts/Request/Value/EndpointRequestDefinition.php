@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Test\Rest\Request\Value;
 
+use Ibexa\Contracts\Test\Rest\BaseRestWebTestCase;
 use Ibexa\Contracts\Test\Rest\Input\Value\InputPayload;
 use Stringable;
 
