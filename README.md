@@ -33,7 +33,6 @@ Your custom `IbexaTestKernel::registerBundles` method needs to yield your bundle
 
 ```php
 yield from parent::registerBundles();
-yield new \Hautelook\TemplatedUriBundle\HautelookTemplatedUriBundle();
 yield new \Ibexa\Bundle\Rest\IbexaRestBundle();
 yield new \Ibexa\Bundle\Test\Rest\IbexaTestRestBundle();
 ```
